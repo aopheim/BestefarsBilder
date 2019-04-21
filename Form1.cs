@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,8 +80,9 @@ namespace BestefarsBilder
             string comment = txtbxComment.Text;
 
             Art art = new Art(id, title, artForm, exhibition, dimensions, year, comment);
-            string jsonObj = JsonConvert.SerializeObject(art, Formatting.Indented);
-            Console.WriteLine(jsonObj);
+            File.WriteAllText(@"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\kunst.json", JsonConvert.SerializeObject(art, Formatting.Indented));
+
+            
         }
     }
 }
