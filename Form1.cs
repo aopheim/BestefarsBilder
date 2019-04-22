@@ -15,6 +15,9 @@ namespace BestefarsBilder
 {
     public partial class Form1 : Form
     {
+        private Color inactiveColor = SystemColors.InactiveCaption;
+        private Color activeColor = SystemColors.Window;
+
         public Form1()
         {
             InitializeComponent();
@@ -37,7 +40,7 @@ namespace BestefarsBilder
 
         private void label2_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -72,8 +75,8 @@ namespace BestefarsBilder
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int id = Int32.Parse(intID.Text);
-            string title = strTitle.Text;
+            int id = Int32.Parse(txtbxID.Text);
+            string title = txtbxTitle.Text;
             string artForm = cmbxArtForm.Text;
             string exhibition = cmbxExhibition.Text;
             string dimensions = cmbxDimensions.Text;
@@ -100,21 +103,77 @@ namespace BestefarsBilder
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
             qrCodeImage.Save(@"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\" + id.ToString() + ".bmp");
+
+            // Make fields non-editable 
         }
 
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // Changing background color of link
+            lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
+            lnkRead.BackColor = SystemColors.Control;
+            lnkEdit.BackColor = SystemColors.Control;
 
+            FormStyleRegister();
         }
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // Changing background color of link
+            lnkRead.BackColor = System.Drawing.Color.PaleGreen;
+            lnkRegister.BackColor = SystemColors.Control;
+            lnkEdit.BackColor = SystemColors.Control;
 
+            FormStyleRead();
         }
 
         private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // Changing background color of link
+            lnkEdit.BackColor = System.Drawing.Color.PaleGreen;
+            lnkRead.BackColor = SystemColors.Control;
+            lnkRegister.BackColor = SystemColors.Control;
 
+            FormStyleEdit();
+        }
+        private void FormStyleRegister()
+        {
+            // Styles the form for acctepting new registrations.
+            txtbxID.BackColor = inactiveColor;
+            txtbxTitle.BackColor = activeColor;
+            cmbxArtForm.BackColor = activeColor;
+            cmbxExhibition.BackColor = activeColor;
+            cmbxDimensions.BackColor = activeColor;
+            txtbxYear.BackColor = activeColor;
+            txtbxComment.BackColor = activeColor;
+        }
+
+        private void FormStyleRead()
+        {
+            // Styles the form for reading registrations.
+            txtbxID.BackColor = activeColor;
+            txtbxTitle.BackColor = inactiveColor;
+            cmbxArtForm.BackColor = inactiveColor;
+            cmbxExhibition.BackColor = inactiveColor;
+            cmbxDimensions.BackColor = inactiveColor;
+            txtbxYear.BackColor = inactiveColor;
+            txtbxComment.BackColor = inactiveColor;
+        }
+
+        private void FormStyleEdit()
+        {
+            // Styles the form for editing entries
+            FormStyleRead();
+            txtbxID.KeyUp += TxtbxID_KeyUp;     // Binding event. 
+        }
+
+        // Changes style of the form to "registering" if enter key is pressed.
+        private void TxtbxID_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                FormStyleRegister();
+            }
         }
     }
 }

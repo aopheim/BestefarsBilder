@@ -39,15 +39,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbxArtForm = new System.Windows.Forms.ComboBox();
             this.lblForm = new System.Windows.Forms.Label();
-            this.strTitle = new System.Windows.Forms.TextBox();
-            this.intID = new System.Windows.Forms.TextBox();
+            this.txtbxTitle = new System.Windows.Forms.TextBox();
+            this.txtbxID = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtBoxSaveVerification = new System.Windows.Forms.TextBox();
             this.lnkRegister = new System.Windows.Forms.LinkLabel();
             this.lnkEdit = new System.Windows.Forms.LinkLabel();
-            this.linkRead = new System.Windows.Forms.LinkLabel();
+            this.lnkRead = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,8 +63,8 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmbxArtForm);
             this.groupBox1.Controls.Add(this.lblForm);
-            this.groupBox1.Controls.Add(this.strTitle);
-            this.groupBox1.Controls.Add(this.intID);
+            this.groupBox1.Controls.Add(this.txtbxTitle);
+            this.groupBox1.Controls.Add(this.txtbxID);
             this.groupBox1.Controls.Add(this.lblTitle);
             this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Location = new System.Drawing.Point(33, 78);
@@ -179,27 +179,27 @@
             this.lblForm.TabIndex = 4;
             this.lblForm.Text = "Kunstform";
             // 
-            // strTitle
+            // txtbxTitle
             // 
-            this.strTitle.Location = new System.Drawing.Point(171, 77);
-            this.strTitle.Name = "strTitle";
-            this.strTitle.Size = new System.Drawing.Size(208, 26);
-            this.strTitle.TabIndex = 3;
-            this.strTitle.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtbxTitle.Location = new System.Drawing.Point(171, 77);
+            this.txtbxTitle.Name = "txtbxTitle";
+            this.txtbxTitle.Size = new System.Drawing.Size(208, 26);
+            this.txtbxTitle.TabIndex = 3;
+            this.txtbxTitle.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // intID
+            // txtbxID
             // 
-            this.intID.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.intID.Cursor = System.Windows.Forms.Cursors.Default;
-            this.intID.Location = new System.Drawing.Point(171, 30);
-            this.intID.Name = "intID";
-            this.intID.ReadOnly = true;
-            this.intID.Size = new System.Drawing.Size(208, 26);
-            this.intID.TabIndex = 2;
-            this.intID.TabStop = false;
-            this.intID.Text = "1";
-            this.intID.WordWrap = false;
-            this.intID.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtbxID.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtbxID.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtbxID.Location = new System.Drawing.Point(171, 30);
+            this.txtbxID.Name = "txtbxID";
+            this.txtbxID.ReadOnly = true;
+            this.txtbxID.Size = new System.Drawing.Size(208, 26);
+            this.txtbxID.TabIndex = 2;
+            this.txtbxID.TabStop = false;
+            this.txtbxID.Text = "1";
+            this.txtbxID.WordWrap = false;
+            this.txtbxID.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // lblTitle
             // 
@@ -250,6 +250,7 @@
             // lnkRegister
             // 
             this.lnkRegister.AutoSize = true;
+            this.lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
             this.lnkRegister.Location = new System.Drawing.Point(29, 28);
             this.lnkRegister.Name = "lnkRegister";
             this.lnkRegister.Size = new System.Drawing.Size(117, 20);
@@ -269,16 +270,16 @@
             this.lnkEdit.Text = "Rediger oppføring";
             this.lnkEdit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEdit_LinkClicked);
             // 
-            // linkRead
+            // lnkRead
             // 
-            this.linkRead.AutoSize = true;
-            this.linkRead.Location = new System.Drawing.Point(223, 28);
-            this.linkRead.Name = "linkRead";
-            this.linkRead.Size = new System.Drawing.Size(100, 20);
-            this.linkRead.TabIndex = 6;
-            this.linkRead.TabStop = true;
-            this.linkRead.Text = "Se oppføring";
-            this.linkRead.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRead_LinkClicked);
+            this.lnkRead.AutoSize = true;
+            this.lnkRead.Location = new System.Drawing.Point(223, 28);
+            this.lnkRead.Name = "lnkRead";
+            this.lnkRead.Size = new System.Drawing.Size(100, 20);
+            this.lnkRead.TabIndex = 6;
+            this.lnkRead.TabStop = true;
+            this.lnkRead.Text = "Se oppføring";
+            this.lnkRead.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRead_LinkClicked);
             // 
             // Form1
             // 
@@ -286,7 +287,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(575, 649);
-            this.Controls.Add(this.linkRead);
+            this.Controls.Add(this.lnkRead);
             this.Controls.Add(this.lnkEdit);
             this.Controls.Add(this.lnkRegister);
             this.Controls.Add(this.txtBoxSaveVerification);
@@ -308,8 +309,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblID;
-        private System.Windows.Forms.TextBox strTitle;
-        private System.Windows.Forms.TextBox intID;
+        private System.Windows.Forms.TextBox txtbxTitle;
+        private System.Windows.Forms.TextBox txtbxID;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblForm;
         private System.Windows.Forms.ComboBox cmbxArtForm;
@@ -324,7 +325,7 @@
         private System.Windows.Forms.TextBox txtBoxSaveVerification;
         private System.Windows.Forms.LinkLabel lnkRegister;
         private System.Windows.Forms.LinkLabel lnkEdit;
-        private System.Windows.Forms.LinkLabel linkRead;
+        private System.Windows.Forms.LinkLabel lnkRead;
     }
 }
 
