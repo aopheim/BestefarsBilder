@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,10 +80,26 @@ namespace BestefarsBilder
             String year = txtbxYear.Text;       // Saving as string makes it possible to save no year as ""
             string comment = txtbxComment.Text;
 
+            // Generating JSON file
             Art art = new Art(id, title, artForm, exhibition, dimensions, year, comment);
             File.WriteAllText(@"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\kunst.json", JsonConvert.SerializeObject(art, Formatting.Indented));
 
-            
+            // Generating QR code
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            string qrString = "" +
+                "id: " + id.ToString() + ", " +
+                "Tittel: " + title + ", " +
+                "Kunstform: " + artForm + ", " +
+                "Utstilling: " + exhibition + ", " +
+                "Dimensjoner: " + dimensions + ", " +
+                "År: " + year + ", " +
+                "Kommentar: " + comment;
+
+                
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrString, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            qrCodeImage.Save(@"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\" + id.ToString() + ".bmp");
         }
     }
 }
