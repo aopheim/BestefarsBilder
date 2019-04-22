@@ -87,7 +87,7 @@ namespace BestefarsBilder
             // Generating QR code
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             string qrString = "" +
-                "id: " + id.ToString() + ", " +
+                "Katalognr.: " + id.ToString() + ", " +
                 "Tittel: " + title + ", " +
                 "Kunstform: " + artForm + ", " +
                 "Utstilling: " + exhibition + ", " +
@@ -100,6 +100,21 @@ namespace BestefarsBilder
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
             qrCodeImage.Save(@"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\" + id.ToString() + ".bmp");
+        }
+
+        private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
         }
     }
 }
