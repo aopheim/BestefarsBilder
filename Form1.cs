@@ -15,8 +15,13 @@ namespace BestefarsBilder
 {
     public partial class Form1 : Form
     {
+        private bool isNewReg = false;
+        private bool isReadReg = false;
+        private bool isEditReg = false;
         private Color inactiveColor = SystemColors.InactiveCaption;
         private Color activeColor = SystemColors.Window;
+        private Color warningColor = Color.Red;
+        private string jsonPath = "";
 
         public Form1()
         {
@@ -75,6 +80,12 @@ namespace BestefarsBilder
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (this.jsonPath.Length < 1)
+            {
+                txtbxConsole.Text = "Du må velge en biblioteksfil.";
+                txtbxConsole.ForeColor = warningColor;
+                return;
+            }
             int id = Int32.Parse(txtbxID.Text);
             string title = txtbxTitle.Text;
             string artForm = cmbxArtForm.Text;
@@ -85,7 +96,10 @@ namespace BestefarsBilder
 
             // Generating JSON file
             Art art = new Art(id, title, artForm, exhibition, dimensions, year, comment);
-            File.WriteAllText(@"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\kunst.json", JsonConvert.SerializeObject(art, Formatting.Indented));
+            string jsonString = JsonConvert.SerializeObject(art, Formatting.Indented);
+            Console.WriteLine(jsonString);
+
+            File.WriteAllText(jsonPath, jsonString);
 
             // Generating QR code
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
@@ -105,6 +119,8 @@ namespace BestefarsBilder
             qrCodeImage.Save(@"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\" + id.ToString() + ".bmp");
 
             // Make fields non-editable 
+
+            txtbxConsole.Text = "Kunst lagret";
         }
 
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -173,6 +189,37 @@ namespace BestefarsBilder
             if (e.KeyCode == Keys.Enter)
             {
                 FormStyleRegister();
+            }
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = @"D:\",
+                Title = "Velg biblioteksfil",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "json",
+                Filter = "json files (*.json)|*.json|All files|*.*",
+                FilterIndex = 1,
+                RestoreDirectory = true,
+                
+            };
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                txtbxJsonPath.Text = openFileDialog1.FileName;
+                this.jsonPath = openFileDialog1.FileName;
+                txtbxJsonPath.ReadOnly = true;
+                txtbxJsonPath.BackColor = inactiveColor;
             }
         }
     }

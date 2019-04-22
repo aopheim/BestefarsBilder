@@ -44,11 +44,15 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.txtBoxSaveVerification = new System.Windows.Forms.TextBox();
+            this.txtbxConsole = new System.Windows.Forms.TextBox();
             this.lnkRegister = new System.Windows.Forms.LinkLabel();
             this.lnkEdit = new System.Windows.Forms.LinkLabel();
             this.lnkRead = new System.Windows.Forms.LinkLabel();
+            this.txtbxJsonPath = new System.Windows.Forms.TextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -67,9 +71,9 @@
             this.groupBox1.Controls.Add(this.txtbxID);
             this.groupBox1.Controls.Add(this.lblTitle);
             this.groupBox1.Controls.Add(this.lblID);
-            this.groupBox1.Location = new System.Drawing.Point(33, 78);
+            this.groupBox1.Location = new System.Drawing.Point(33, 156);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(482, 469);
+            this.groupBox1.Size = new System.Drawing.Size(530, 469);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registrer nytt bilde";
@@ -223,7 +227,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(459, 571);
+            this.btnSave.Location = new System.Drawing.Point(459, 633);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(91, 32);
             this.btnSave.TabIndex = 2;
@@ -231,21 +235,20 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // txtBoxSaveVerification
+            // txtbxConsole
             // 
-            this.txtBoxSaveVerification.BackColor = System.Drawing.SystemColors.Control;
-            this.txtBoxSaveVerification.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBoxSaveVerification.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtBoxSaveVerification.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxSaveVerification.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtBoxSaveVerification.Location = new System.Drawing.Point(204, 583);
-            this.txtBoxSaveVerification.Multiline = true;
-            this.txtBoxSaveVerification.Name = "txtBoxSaveVerification";
-            this.txtBoxSaveVerification.ReadOnly = true;
-            this.txtBoxSaveVerification.Size = new System.Drawing.Size(208, 20);
-            this.txtBoxSaveVerification.TabIndex = 3;
-            this.txtBoxSaveVerification.TabStop = false;
-            this.txtBoxSaveVerification.Text = "Bilde lagret!";
+            this.txtbxConsole.BackColor = System.Drawing.SystemColors.Control;
+            this.txtbxConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtbxConsole.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtbxConsole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxConsole.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtbxConsole.Location = new System.Drawing.Point(204, 645);
+            this.txtbxConsole.Multiline = true;
+            this.txtbxConsole.Name = "txtbxConsole";
+            this.txtbxConsole.ReadOnly = true;
+            this.txtbxConsole.Size = new System.Drawing.Size(208, 20);
+            this.txtbxConsole.TabIndex = 3;
+            this.txtbxConsole.TabStop = false;
             // 
             // lnkRegister
             // 
@@ -281,16 +284,47 @@
             this.lnkRead.Text = "Se oppføring";
             this.lnkRead.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRead_LinkClicked);
             // 
+            // txtbxJsonPath
+            // 
+            this.txtbxJsonPath.Location = new System.Drawing.Point(23, 28);
+            this.txtbxJsonPath.Name = "txtbxJsonPath";
+            this.txtbxJsonPath.Size = new System.Drawing.Size(312, 26);
+            this.txtbxJsonPath.TabIndex = 7;
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowse.Location = new System.Drawing.Point(361, 28);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(123, 26);
+            this.btnBrowse.TabIndex = 15;
+            this.btnBrowse.Text = "Bla gjennom...";
+            this.btnBrowse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnBrowse);
+            this.groupBox2.Controls.Add(this.txtbxJsonPath);
+            this.groupBox2.Location = new System.Drawing.Point(33, 55);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(530, 74);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Angi biblioteksfil";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(575, 649);
+            this.ClientSize = new System.Drawing.Size(575, 677);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.lnkRead);
             this.Controls.Add(this.lnkEdit);
             this.Controls.Add(this.lnkRegister);
-            this.Controls.Add(this.txtBoxSaveVerification);
+            this.Controls.Add(this.txtbxConsole);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -300,6 +334,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,10 +358,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtbxComment;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtBoxSaveVerification;
+        private System.Windows.Forms.TextBox txtbxConsole;
         private System.Windows.Forms.LinkLabel lnkRegister;
         private System.Windows.Forms.LinkLabel lnkEdit;
         private System.Windows.Forms.LinkLabel lnkRead;
+        private System.Windows.Forms.TextBox txtbxJsonPath;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
