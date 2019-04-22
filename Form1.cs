@@ -15,7 +15,7 @@ namespace BestefarsBilder
 {
     public partial class Form1 : Form
     {
-        private bool isNewReg = false;
+        private bool isNewReg = true;       // the program starts with option to save new registration
         private bool isReadReg = false;
         private bool isEditReg = false;
         private Color inactiveColor = SystemColors.InactiveCaption;
@@ -86,27 +86,44 @@ namespace BestefarsBilder
                 txtbxConsole.ForeColor = warningColor;
                 return;
             }
+            // Collecting user data
             int id = Int32.Parse(txtbxID.Text);
             string title = txtbxTitle.Text;
-            string artForm = cmbxArtForm.Text;
+            string artform = cmbxArtForm.Text;
             string exhibition = cmbxExhibition.Text;
             string dimensions = cmbxDimensions.Text;
-            String year = txtbxYear.Text;       // Saving as string makes it possible to save no year as ""
+            string year = txtbxYear.Text;       // Saving as string makes it possible to save no year as ""
             string comment = txtbxComment.Text;
 
-            // Generating JSON file
-            Art art = new Art(id, title, artForm, exhibition, dimensions, year, comment);
-            string jsonString = JsonConvert.SerializeObject(art, Formatting.Indented);
-            Console.WriteLine(jsonString);
+            // Creating art object.
+            Art art = new Art
+            {
+                id = id,
+                title = title,
+                artform = artform,
+                exhibition = exhibition,
+                dimensions = dimensions,
+                year = year,
+                comment = comment,
+            };
+            
+            if (this.isNewReg == true) // Registration is to be appended to the JSON file
+            {
+                string jsonString = File.ReadAllText(jsonPath);
+                List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
+                artworks.Add(art);
+                string newJson = JsonConvert.SerializeObject(artworks, Formatting.Indented);
+                File.WriteAllText(jsonPath, newJson);
+            }
 
-            File.WriteAllText(jsonPath, jsonString);
+            
 
             // Generating QR code
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             string qrString = "" +
                 "Katalognr.: " + id.ToString() + ", " +
                 "Tittel: " + title + ", " +
-                "Kunstform: " + artForm + ", " +
+                "Kunstform: " + artform + ", " +
                 "Utstilling: " + exhibition + ", " +
                 "Dimensjoner: " + dimensions + ", " +
                 "År: " + year + ", " +
@@ -126,11 +143,12 @@ namespace BestefarsBilder
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // Changing background color of link
+            this.isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
             lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
             lnkEdit.BackColor = SystemColors.Control;
 
-            FormStyleRegister();
+            FormStyleRegister();        // Styling the form to registering mode
         }
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

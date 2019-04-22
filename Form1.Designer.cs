@@ -242,11 +242,11 @@
             this.txtbxConsole.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtbxConsole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbxConsole.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtbxConsole.Location = new System.Drawing.Point(204, 645);
+            this.txtbxConsole.Location = new System.Drawing.Point(204, 633);
             this.txtbxConsole.Multiline = true;
             this.txtbxConsole.Name = "txtbxConsole";
             this.txtbxConsole.ReadOnly = true;
-            this.txtbxConsole.Size = new System.Drawing.Size(208, 20);
+            this.txtbxConsole.Size = new System.Drawing.Size(208, 32);
             this.txtbxConsole.TabIndex = 3;
             this.txtbxConsole.TabStop = false;
             // 
