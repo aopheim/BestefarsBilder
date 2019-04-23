@@ -4,3 +4,4 @@ Dette skal bli et lite program som skal brukes for å katalogisere kunstverk. De
 
 På lengre sikt er tanken at hele kunstkatalogen med tilhørende bilder skal legges ut på nettgalleriet https://finnaageandersen.wordpress.com/ for salg/utleie. 
 
+![](https://raw.githubusercontent.com/aopheim/BestefarsBilder/master/screenshot.PNG)
