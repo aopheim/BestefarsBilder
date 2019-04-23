@@ -120,6 +120,11 @@ namespace BestefarsBilder
                 return;
             }
 
+            if (this.isEditReg == true)
+            {
+                // Edit entry in JSON file
+            }
+
             
 
             // Generating QR code
@@ -153,6 +158,7 @@ namespace BestefarsBilder
             lnkEdit.BackColor = SystemColors.Control;
 
             FormStyleRegister();        // Styling the form to registering mode
+            ClearTextBoxes();
         }
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -172,7 +178,7 @@ namespace BestefarsBilder
             lnkEdit.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
             lnkRegister.BackColor = SystemColors.Control;
-
+            
             FormStyleEdit();
         }
         
@@ -188,7 +194,57 @@ namespace BestefarsBilder
             txtbxYear.BackColor = activeColor;
             txtbxComment.BackColor = activeColor;
 
+            // Enabling save button
             btnSave.Enabled = true;
+
+            if (txtbxJsonPath.Text.Length < 1)
+            {
+                txtbxConsole.Text = "Du må velge en biblioteksfil.";
+                txtbxConsole.ForeColor = warningColor;
+                return;
+            }
+
+            // Setting text field data if the ID is known.
+            FormContentRegister(Int32.Parse(txtbxID.Text));
+
+        }
+
+
+        // Filling in text boxes in form with data from the JSON file. 
+        // If id is not in JSON file, set all fields empty.
+        // id: ID to edit. 
+        private void FormContentRegister(int id)
+        {
+            // Deserializing JSON content
+            string jsonString = File.ReadAllText(jsonPath);
+            List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
+            Console.WriteLine(artworks.Find(x => x.id == id));
+            Art foundItem = artworks.Find(x => x.id == id);
+            if (foundItem == null)
+            {
+                // Set all text boxes to blank
+                ClearTextBoxes();
+                return;
+            }
+            // Set all text boxes to the content of foundItem
+            FillTextBoxes(foundItem);
+        }
+
+        // Setting all text boxes to content of foundItem
+        private void FillTextBoxes(Art foundItem)
+        {
+            txtbxTitle.Text = foundItem.title;
+            cmbxArtForm.Text = foundItem.artform;
+            cmbxExhibition.Text = foundItem.exhibition;
+            cmbxDimensions.Text = foundItem.dimensions;
+            txtbxYear.Text = foundItem.year;
+            txtbxComment.Text = foundItem.comment;
+        }
+
+        // Setting all text boxes to ""
+        private void ClearTextBoxes()
+        {
+            throw new NotImplementedException();
         }
 
         // Styles the form for reading registrations.
