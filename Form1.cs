@@ -114,6 +114,10 @@ namespace BestefarsBilder
                 artworks.Add(art);
                 string newJson = JsonConvert.SerializeObject(artworks, Formatting.Indented);
                 File.WriteAllText(jsonPath, newJson);
+
+                this.isNewReg = false;      // Resetting boolean.
+                linkRead_LinkClicked(1, new LinkLabelLinkClickedEventArgs(lnkRead.Links[0]));           // Simulating that the user clicked the read button
+                return;
             }
 
             
@@ -153,6 +157,7 @@ namespace BestefarsBilder
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            this.isReadReg = true;
             // Changing background color of link
             lnkRead.BackColor = System.Drawing.Color.PaleGreen;
             lnkRegister.BackColor = SystemColors.Control;
@@ -170,9 +175,11 @@ namespace BestefarsBilder
 
             FormStyleEdit();
         }
+        
+        // Styles the form for acctepting new registrations.
         private void FormStyleRegister()
         {
-            // Styles the form for acctepting new registrations.
+            // Setting colors
             txtbxID.BackColor = inactiveColor;
             txtbxTitle.BackColor = activeColor;
             cmbxArtForm.BackColor = activeColor;
@@ -180,11 +187,14 @@ namespace BestefarsBilder
             cmbxDimensions.BackColor = activeColor;
             txtbxYear.BackColor = activeColor;
             txtbxComment.BackColor = activeColor;
+
+            btnSave.Enabled = true;
         }
 
+        // Styles the form for reading registrations.
         private void FormStyleRead()
         {
-            // Styles the form for reading registrations.
+            // Setting colors
             txtbxID.BackColor = activeColor;
             txtbxTitle.BackColor = inactiveColor;
             cmbxArtForm.BackColor = inactiveColor;
@@ -192,6 +202,8 @@ namespace BestefarsBilder
             cmbxDimensions.BackColor = inactiveColor;
             txtbxYear.BackColor = inactiveColor;
             txtbxComment.BackColor = inactiveColor;
+
+            btnSave.Enabled = false;        // Unabling the save button if in read mode.
         }
 
         private void FormStyleEdit()
