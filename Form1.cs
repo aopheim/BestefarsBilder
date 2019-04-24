@@ -121,10 +121,8 @@ namespace BestefarsBilder
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (this.jsonPath.Length < 1)
+            if (!IsJsonFile())
             {
-                txtbxConsole.Text = "Du må velge en biblioteksfil.";
-                txtbxConsole.ForeColor = warningColor;
                 return;
             }
             // Collecting user data
@@ -192,21 +190,22 @@ namespace BestefarsBilder
 
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (txtbxJsonPath.Text.Length < 1)
-            {
-                txtbxConsole.Text = "Du må velge en biblioteksfil";
-                txtbxConsole.ForeColor = warningColor;
-                return;
-            }
-            // Changing background color of link
+
+                
             this.isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
             this.isReadReg = false;
             this.isEditReg = false;
+            // Changing background color of link
             lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
             lnkEdit.BackColor = SystemColors.Control;
 
-
+            // Setting text on the GroupBox
+            groupBox1.Text = "Registrer nytt bilde";
+            if (!IsJsonFile())
+            {
+                return;
+            }
             txtbxID.Text = GetUniqueID().ToString();
             ClearTextBoxes();
             FormStyleRegister();        // Styling the form to registering mode
@@ -234,11 +233,16 @@ namespace BestefarsBilder
             lnkRegister.BackColor = SystemColors.Control;
             lnkEdit.BackColor = SystemColors.Control;
 
+            // Setting text on GroupBox
+            groupBox1.Text = "Se oppføring";
             FormStyleRead();
         }
 
         private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            this.isEditReg = true;
+            this.isNewReg = false;
+            this.isReadReg = false;
             // Changing background color of link
             lnkEdit.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
@@ -265,16 +269,28 @@ namespace BestefarsBilder
             btnSave.Enabled = true;  // Enabling save button
             txtbxID.ReadOnly = true;  // Disabling ID field
             EnableTextFields();     // Enabling the other fields
+            if (!IsJsonFile())
+            {
+                return;
+            }
+            
 
+            
+
+        }
+
+        private bool IsJsonFile()
+        {
             if (txtbxJsonPath.Text.Length < 1)
             {
                 txtbxConsole.Text = "Du må velge en biblioteksfil.";
                 txtbxConsole.ForeColor = warningColor;
-                return;
+                return false;
             }
-
-            
-
+            else
+            {
+            return true;
+            }
         }
 
 
@@ -332,12 +348,16 @@ namespace BestefarsBilder
             txtbxYear.BackColor = inactiveColor;
             txtbxComment.BackColor = inactiveColor;
 
-            // Setting text on GroupBox
-            groupBox1.Text = "Se oppføring";
+            
 
             btnSave.Enabled = false;        // Unabling the save button if in read mode.
             txtbxID.ReadOnly = false;       // Enabling user to enter ID
             DisableFields();        // Disabling all text fields and comboboxes
+
+            if (!IsJsonFile())
+            {
+                return;
+            }
 
             txtbxID.KeyUp += TxtbxID_KeyUp;     // Binding event. 
             txtbxID.KeyDown += TxtbxID_KeyDown;
