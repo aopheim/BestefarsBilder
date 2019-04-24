@@ -22,6 +22,7 @@ namespace BestefarsBilder
         private Color activeColor = SystemColors.Window;
         private Color warningColor = Color.Red;
         private string jsonPath = "";
+        
 
         public Form1()
         {
@@ -215,6 +216,8 @@ namespace BestefarsBilder
 
             // Enabling save button
             btnSave.Enabled = true;
+            // Disabling ID field
+            txtbxID.ReadOnly = true;
 
             if (txtbxJsonPath.Text.Length < 1)
             {
@@ -223,8 +226,7 @@ namespace BestefarsBilder
                 return;
             }
 
-            // Setting text field data if the ID is known.
-            FormContentRegister(Int32.Parse(txtbxID.Text));
+            
 
         }
 
@@ -284,6 +286,10 @@ namespace BestefarsBilder
             txtbxComment.BackColor = inactiveColor;
 
             btnSave.Enabled = false;        // Unabling the save button if in read mode.
+            txtbxID.ReadOnly = false;       // Enabling user to enter ID
+
+            txtbxID.KeyUp += TxtbxID_KeyUp;     // Binding event. 
+            txtbxID.KeyDown += TxtbxID_KeyDown;
         }
 
         private void FormStyleEdit()
@@ -293,12 +299,29 @@ namespace BestefarsBilder
             txtbxID.KeyUp += TxtbxID_KeyUp;     // Binding event. 
         }
 
-        // Changes style of the form to "registering" if enter key is pressed.
-        private void TxtbxID_KeyUp(object sender, KeyEventArgs e)
+
+        // Turning of the sound when pressing enter
+        private void TxtbxID_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
+                e.SuppressKeyPress = true;
+            }
+        }
+
+
+        // Changes style of the form to "registering" if enter key is pressed.
+        private void TxtbxID_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && isEditReg)
+            {
                 FormStyleRegister();
+                return;
+            }
+            if (e.KeyCode == Keys.Enter && isReadReg)
+            {
+                // Setting text field data if the ID is known.
+                FormContentRegister(Int32.Parse(txtbxID.Text));
             }
         }
 
