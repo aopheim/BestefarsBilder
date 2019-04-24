@@ -15,18 +15,30 @@ namespace BestefarsBilder
 {
     public partial class Form1 : Form
     {
-        private bool isNewReg = true;       // the program starts with option to save new registration
+        private bool isNewReg = false;       
         private bool isReadReg = false;
         private bool isEditReg = false;
         private Color inactiveColor = SystemColors.InactiveCaption;
         private Color activeColor = SystemColors.Window;
         private Color warningColor = Color.Red;
         private string jsonPath = "";
+        private List<TextBox> txtBoxes;
+        private List<ComboBox> comboBoxes;
         
-
+        
+        
+        // Constructor
         public Form1()
         {
             InitializeComponent();
+            txtBoxes = new List<TextBox>()
+            {
+                txtbxTitle, txtbxYear, txtbxComment
+            };
+            comboBoxes = new List<ComboBox>
+            {
+                cmbxArtForm, cmbxExhibition, cmbxDimensions
+            };
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -77,6 +89,34 @@ namespace BestefarsBilder
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        // Sets all text and combobox fields to readonly
+        private void DisableFields()
+        {
+            foreach (TextBox txt in txtBoxes)
+            {
+                txt.ReadOnly = true;
+            }
+
+            foreach (ComboBox cmb in comboBoxes)
+            {
+                cmb.Enabled = false;
+            }
+
+        }
+
+        private void EnableTextFields()
+        {
+            foreach (TextBox txt in txtBoxes)
+            {
+                txt.ReadOnly = false;
+            }
+
+            foreach (ComboBox cmb in comboBoxes)
+            {
+                cmb.Enabled = true;
+            };
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -160,6 +200,8 @@ namespace BestefarsBilder
             }
             // Changing background color of link
             this.isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
+            this.isReadReg = false;
+            this.isEditReg = false;
             lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
             lnkEdit.BackColor = SystemColors.Control;
@@ -183,7 +225,10 @@ namespace BestefarsBilder
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // Resetting the other boolean values
             this.isReadReg = true;
+            this.isEditReg = false;
+            this.isNewReg = false;
             // Changing background color of link
             lnkRead.BackColor = System.Drawing.Color.PaleGreen;
             lnkRegister.BackColor = SystemColors.Control;
@@ -198,7 +243,9 @@ namespace BestefarsBilder
             lnkEdit.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
             lnkRegister.BackColor = SystemColors.Control;
-            
+
+            // Setting text on GroupBox:
+            groupBox1.Text = "Rediger oppføring";
             FormStyleEdit();
         }
         
@@ -214,10 +261,10 @@ namespace BestefarsBilder
             txtbxYear.BackColor = activeColor;
             txtbxComment.BackColor = activeColor;
 
-            // Enabling save button
-            btnSave.Enabled = true;
-            // Disabling ID field
-            txtbxID.ReadOnly = true;
+            
+            btnSave.Enabled = true;  // Enabling save button
+            txtbxID.ReadOnly = true;  // Disabling ID field
+            EnableTextFields();     // Enabling the other fields
 
             if (txtbxJsonPath.Text.Length < 1)
             {
@@ -285,8 +332,12 @@ namespace BestefarsBilder
             txtbxYear.BackColor = inactiveColor;
             txtbxComment.BackColor = inactiveColor;
 
+            // Setting text on GroupBox
+            groupBox1.Text = "Se oppføring";
+
             btnSave.Enabled = false;        // Unabling the save button if in read mode.
             txtbxID.ReadOnly = false;       // Enabling user to enter ID
+            DisableFields();        // Disabling all text fields and comboboxes
 
             txtbxID.KeyUp += TxtbxID_KeyUp;     // Binding event. 
             txtbxID.KeyDown += TxtbxID_KeyDown;
