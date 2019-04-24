@@ -151,14 +151,33 @@ namespace BestefarsBilder
 
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (txtbxJsonPath.Text.Length < 1)
+            {
+                txtbxConsole.Text = "Du må velge en biblioteksfil";
+                txtbxConsole.ForeColor = warningColor;
+                return;
+            }
             // Changing background color of link
             this.isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
             lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
             lnkEdit.BackColor = SystemColors.Control;
 
-            FormStyleRegister();        // Styling the form to registering mode
+
+            txtbxID.Text = GetUniqueID().ToString();
             ClearTextBoxes();
+            FormStyleRegister();        // Styling the form to registering mode
+        }
+
+
+        // Should return a unique ID that is not present in the JSON file
+        private int GetUniqueID()
+        {
+            string jsonString = File.ReadAllText(jsonPath);
+            List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
+            List<int> ids = artworks.Select(o => o.id).ToList();
+            int max = ids.Max();
+            return max + 1;
         }
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -244,7 +263,12 @@ namespace BestefarsBilder
         // Setting all text boxes to ""
         private void ClearTextBoxes()
         {
-            throw new NotImplementedException();
+            txtbxTitle.Text = "";
+            cmbxArtForm.Text = "";
+            cmbxExhibition.Text = "";
+            cmbxDimensions.Text = "";
+            txtbxYear.Text = "";
+            txtbxComment.Text = "";
         }
 
         // Styles the form for reading registrations.
