@@ -135,7 +135,7 @@ namespace BestefarsBilder
             string comment = txtbxComment.Text;
 
             // Creating art object.
-            Art art = new Art
+            Art newArt = new Art
             {
                 id = id,
                 title = title,
@@ -150,7 +150,7 @@ namespace BestefarsBilder
             {
                 string jsonString = File.ReadAllText(jsonPath);
                 List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
-                artworks.Add(art);
+                artworks.Add(newArt);
                 string newJson = JsonConvert.SerializeObject(artworks, Formatting.Indented);
                 File.WriteAllText(jsonPath, newJson);
 
@@ -162,9 +162,17 @@ namespace BestefarsBilder
             if (this.isEditReg == true)
             {
                 // Edit entry in JSON file
+                string jsonString = File.ReadAllText(jsonPath);
+                List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
+                Art oldArt = artworks.Find(o => o.id == newArt.id);
+                oldArt = newArt;        // Updating with new info
+                artworks.Insert(newArt.id - 1, newArt);
+                string newJson = JsonConvert.SerializeObject(artworks, Formatting.Indented);
+                File.WriteAllText(jsonPath, newJson);
+                return;
             }
 
-            
+
 
             // Generating QR code
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
@@ -368,6 +376,7 @@ namespace BestefarsBilder
             // Styles the form for editing entries
             FormStyleRead();
             txtbxID.KeyUp += TxtbxID_KeyUp;     // Binding event. 
+            txtbxID.KeyDown += TxtbxID_KeyDown;         // Turning off sound when hitting enter.
         }
 
 
@@ -387,6 +396,7 @@ namespace BestefarsBilder
             if (e.KeyCode == Keys.Enter && isEditReg)
             {
                 FormStyleRegister();
+                FormContentRegister(Int32.Parse(txtbxID.Text));
                 return;
             }
             if (e.KeyCode == Keys.Enter && isReadReg)
