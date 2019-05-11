@@ -76,11 +76,11 @@
             this.groupBox1.Size = new System.Drawing.Size(530, 469);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Registrer nytt bilde";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtbxComment
             // 
+            this.txtbxComment.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtbxComment.Location = new System.Drawing.Point(171, 318);
             this.txtbxComment.Multiline = true;
             this.txtbxComment.Name = "txtbxComment";
@@ -98,6 +98,7 @@
             // 
             // txtbxYear
             // 
+            this.txtbxYear.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtbxYear.Location = new System.Drawing.Point(171, 271);
             this.txtbxYear.Name = "txtbxYear";
             this.txtbxYear.Size = new System.Drawing.Size(208, 26);
@@ -116,6 +117,7 @@
             // 
             this.cmbxDimensions.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbxDimensions.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbxDimensions.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.cmbxDimensions.FormattingEnabled = true;
             this.cmbxDimensions.Items.AddRange(new object[] {
             "30x30",
@@ -138,6 +140,7 @@
             // 
             this.cmbxExhibition.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbxExhibition.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbxExhibition.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.cmbxExhibition.FormattingEnabled = true;
             this.cmbxExhibition.Items.AddRange(new object[] {
             "Utstilling 1",
@@ -162,6 +165,7 @@
             // 
             this.cmbxArtForm.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbxArtForm.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbxArtForm.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.cmbxArtForm.FormattingEnabled = true;
             this.cmbxArtForm.Items.AddRange(new object[] {
             "Collage",
@@ -185,6 +189,7 @@
             // 
             // txtbxTitle
             // 
+            this.txtbxTitle.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtbxTitle.Location = new System.Drawing.Point(171, 77);
             this.txtbxTitle.Name = "txtbxTitle";
             this.txtbxTitle.Size = new System.Drawing.Size(208, 26);
@@ -201,9 +206,7 @@
             this.txtbxID.Size = new System.Drawing.Size(208, 26);
             this.txtbxID.TabIndex = 2;
             this.txtbxID.TabStop = false;
-            this.txtbxID.Text = "1";
             this.txtbxID.WordWrap = false;
-            this.txtbxID.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // lblTitle
             // 
@@ -253,7 +256,7 @@
             // lnkRegister
             // 
             this.lnkRegister.AutoSize = true;
-            this.lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
+            this.lnkRegister.BackColor = System.Drawing.SystemColors.Control;
             this.lnkRegister.Location = new System.Drawing.Point(29, 28);
             this.lnkRegister.Name = "lnkRegister";
             this.lnkRegister.Size = new System.Drawing.Size(117, 20);

@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BestefarsBilder.exe" size="18944">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BestefarsBilder.exe" size="22528">
       <assemblyIdentity name="BestefarsBilder" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>U7TVwyAt0/Bd8jUnrG2Wzv7BT4GjgtjIqny4rXIn2jw=</dsig:DigestValue>
+        <dsig:DigestValue>JSA4Rp4wJG1vRPrCUpnSevwL2gz7QOaEiWNNRJa+avM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

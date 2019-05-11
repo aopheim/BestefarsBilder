@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Fyra fina flickor",
+    "artform": "Collage",
+    "exhibition": "Oslos Art Exhibition",
+    "dimensions": "300x100",
+    "year": "1981",
+    "comment": "Litt saann"
+  },
+  {
+    "id": 2,
+    "title": "Mona Lisa",
+    "artform": "Portrett",
+    "exhibition": "Hamar Art Show",
+    "dimensions": "20x50",
+    "year": "1995",
+    "comment": "Hei hei"
+  },
+  {
+    "id": 3,
+    "title": "Sommerfuglbilde",
+    "artform": "Collage",
+    "exhibition": "Hamar Art Show",
+    "dimensions": "30x50",
+    "year": "1993",
+    "comment": "Tittei"
+  }
+]
+  
