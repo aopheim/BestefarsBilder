@@ -15,7 +15,7 @@ namespace BestefarsBilder
 {
     public partial class Form1 : Form
     {
-        private bool isNewReg = false;       
+        private bool isNewReg = false;
         private bool isReadReg = false;
         private bool isEditReg = false;
         private Color inactiveColor = SystemColors.InactiveCaption;
@@ -24,9 +24,10 @@ namespace BestefarsBilder
         private string jsonPath = "";
         private List<TextBox> txtBoxes;
         private List<ComboBox> comboBoxes;
-        
-        
-        
+        private Logic _logic;
+
+
+
         // Constructor
         public Form1()
         {
@@ -39,6 +40,9 @@ namespace BestefarsBilder
             {
                 cmbxArtForm, cmbxExhibition, cmbxDimensions
             };
+            jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\kunst.json";
+            txtbxJsonPath.Text = jsonPath;
+            _logic = new Logic(new Storage(jsonPath));
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -58,15 +62,10 @@ namespace BestefarsBilder
 
         private void label2_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -145,15 +144,10 @@ namespace BestefarsBilder
                 year = year,
                 comment = comment,
             };
-            
+
             if (this.isNewReg == true) // Registration is to be appended to the JSON file
             {
-                string jsonString = File.ReadAllText(jsonPath);
-                List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
-                artworks.Add(newArt);
-                string newJson = JsonConvert.SerializeObject(artworks, Formatting.Indented);
-                File.WriteAllText(jsonPath, newJson);
-
+                _logic.AddArt(newArt);
                 this.isNewReg = false;      // Resetting boolean.
                 linkRead_LinkClicked(1, new LinkLabelLinkClickedEventArgs(lnkRead.Links[0]));           // Simulating that the user clicked the read button
                 return;
@@ -185,7 +179,7 @@ namespace BestefarsBilder
                 "År: " + year + ", " +
                 "Kommentar: " + comment;
 
-                
+
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrString, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
@@ -199,7 +193,7 @@ namespace BestefarsBilder
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
-                
+
             this.isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
             this.isReadReg = false;
             this.isEditReg = false;
@@ -210,10 +204,6 @@ namespace BestefarsBilder
 
             // Setting text on the GroupBox
             groupBox1.Text = "Registrer nytt bilde";
-            if (!IsJsonFile())
-            {
-                return;
-            }
             txtbxID.Text = GetUniqueID().ToString();
             ClearTextBoxes();
             FormStyleRegister();        // Styling the form to registering mode
@@ -260,7 +250,7 @@ namespace BestefarsBilder
             groupBox1.Text = "Rediger oppføring";
             FormStyleEdit();
         }
-        
+
         // Styles the form for acctepting new registrations.
         private void FormStyleRegister()
         {
@@ -273,7 +263,7 @@ namespace BestefarsBilder
             txtbxYear.BackColor = activeColor;
             txtbxComment.BackColor = activeColor;
 
-            
+
             btnSave.Enabled = true;  // Enabling save button
             txtbxID.ReadOnly = true;  // Disabling ID field
             EnableTextFields();     // Enabling the other fields
@@ -281,9 +271,9 @@ namespace BestefarsBilder
             {
                 return;
             }
-            
 
-            
+
+
 
         }
 
@@ -297,7 +287,7 @@ namespace BestefarsBilder
             }
             else
             {
-            return true;
+                return true;
             }
         }
 
@@ -307,19 +297,11 @@ namespace BestefarsBilder
         // id: ID to edit. 
         private void FormContentRegister(int id)
         {
-            // Deserializing JSON content
-            string jsonString = File.ReadAllText(jsonPath);
-            List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
-            Console.WriteLine(artworks.Find(x => x.id == id));
-            Art foundItem = artworks.Find(x => x.id == id);
-            if (foundItem == null)
-            {
-                // Set all text boxes to blank
+            var art = _logic.GetArtPostById(id);
+            if (art == null)
                 ClearTextBoxes();
-                return;
-            }
-            // Set all text boxes to the content of foundItem
-            FillTextBoxes(foundItem);
+            else
+                FillTextBoxes(art);
         }
 
         // Setting all text boxes to content of foundItem
@@ -356,7 +338,7 @@ namespace BestefarsBilder
             txtbxYear.BackColor = inactiveColor;
             txtbxComment.BackColor = inactiveColor;
 
-            
+
 
             btnSave.Enabled = false;        // Unabling the save button if in read mode.
             txtbxID.ReadOnly = false;       // Enabling user to enter ID
@@ -425,7 +407,7 @@ namespace BestefarsBilder
                 Filter = "json files (*.json)|*.json|All files|*.*",
                 FilterIndex = 1,
                 RestoreDirectory = true,
-                
+
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
