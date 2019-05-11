@@ -15,24 +15,5 @@ namespace BestefarsBilder
         public string dimensions { get; set; }
         public string year { get; set; }
         public string comment { get; set; }
-
-        /*
-        public Art(int id)
-        {
-            this.id = id;
-        }
-
-        public Art(int id, string title, string artform, 
-            string exhibition, string dimensions, string year, string comment)
-        {
-            this.id = id;
-            this.title = title;
-            this.artform = artform;
-            this.exhibition = exhibition;
-            this.dimensions = dimensions;
-            this.year = year;
-            this.comment = comment;
-        }
-        */
     }
 }
