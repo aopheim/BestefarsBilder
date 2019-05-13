@@ -9,29 +9,28 @@ namespace BestefarsBilder.Test
     [TestClass]
     public class LogicTests
     {
-        Mock<IStorage> storage;
-        Logic logic;
-        List<Art> arts;
+        private Mock<IStorage> _storage;
+        private Logic _logic;
+        private List<Art> _arts;
 
         [TestInitialize]
         public void SetUp()
         {
-            storage = new Mock<IStorage>(MockBehavior.Strict);
-            logic = new Logic(storage.Object);
-            arts = new List<Art>()
+            _storage = new Mock<IStorage>(MockBehavior.Strict);
+            _logic = new Logic(_storage.Object);
+            _arts = new List<Art>()
                 {
-                    new Art(){ id = 1},
+                    new Art(){ id = 1, title = "Title" },
                     new Art(){ id = 2},
                     new Art(){ id = 3}
                 };
-            storage.Setup(x => x.GetFromStorage()).Returns(arts);
-              
+            _storage.Setup(x => x.GetFromStorage()).Returns(_arts);
         }
 
         [TestMethod]
         public void GetArtPostById()
         {
-            var a = logic.GetArtPostById(1);
+            var a = _logic.GetArtPostById(1);
 
             Assert.AreEqual(1, a.id);
         }
@@ -39,7 +38,7 @@ namespace BestefarsBilder.Test
         [TestMethod]
         public void GetArtPostById_BadId()
         {
-            var a = logic.GetArtPostById(4);
+            var a = _logic.GetArtPostById(4);
             Assert.IsNull(a);
         }
 
@@ -49,10 +48,26 @@ namespace BestefarsBilder.Test
         {
             var a = new Art();
 
-            storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Count() == 4)));
-            logic.AddArt(a);
+            _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Count() == 4)));
+            _logic.AddArt(a);
 
-            storage.VerifyAll();
+            _storage.VerifyAll();
+        }
+
+        [TestMethod]
+        public void EditArt()
+        {
+            Art editedArt = new Art() { id = 1, title = "EditedTitle" };
+            _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y[0].title == "EditedTitle")));
+            _logic.EditArt(1, editedArt);
+            
+            _storage.VerifyAll();
+        }
+
+        [TestMethod]
+        public void EditArt_BadId()
+        {
+            throw new NotImplementedException();
         }
     }
 }

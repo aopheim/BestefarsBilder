@@ -28,5 +28,14 @@ namespace BestefarsBilder
             arts.Add(a);
             _storage.PutInStorage(arts);
         }
+        
+        public void EditArt(int id, Art newArt)
+        {
+            var arts = _storage.GetFromStorage().ToList();
+            Art oldArt = GetArtPostById(id);
+            oldArt = newArt;
+            arts.Insert(oldArt.id - 1, newArt);
+            _storage.PutInStorage(arts);
+        }
     }
 }
