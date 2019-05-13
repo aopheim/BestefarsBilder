@@ -149,20 +149,15 @@ namespace BestefarsBilder
             {
                 _logic.AddArt(newArt);
                 this.isNewReg = false;      // Resetting boolean.
-                linkRead_LinkClicked(1, new LinkLabelLinkClickedEventArgs(lnkRead.Links[0]));           // Simulating that the user clicked the read button
+                linkRead_LinkClicked(1, new LinkLabelLinkClickedEventArgs(lnkRead.Links[0]));           // Simulating that the user clicked the read button for resetting styling.
                 return;
             }
 
             if (this.isEditReg == true)
             {
                 // Edit entry in JSON file
-                string jsonString = File.ReadAllText(jsonPath);
-                List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
-                Art oldArt = artworks.Find(o => o.id == newArt.id);
-                oldArt = newArt;        // Updating with new info
-                artworks.Insert(newArt.id - 1, newArt);
-                string newJson = JsonConvert.SerializeObject(artworks, Formatting.Indented);
-                File.WriteAllText(jsonPath, newJson);
+                _logic.EditArt(newArt.id, newArt);
+                this.isEditReg = false;
                 return;
             }
 
