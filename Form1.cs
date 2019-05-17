@@ -25,6 +25,7 @@ namespace BestefarsBilder
         private List<TextBox> txtBoxes;
         private List<ComboBox> comboBoxes;
         private Logic _logic;
+        private Graphics _graphics;
 
 
 
@@ -40,9 +41,10 @@ namespace BestefarsBilder
             {
                 cmbxArtForm, cmbxExhibition, cmbxDimensions
             };
-            jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\kunst.json";
+            jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\lib\kunst.json";
             txtbxJsonPath.Text = jsonPath;
             _logic = new Logic(new Storage(jsonPath));
+            _graphics = new Graphics();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -156,7 +158,7 @@ namespace BestefarsBilder
             if (this.isEditReg == true)
             {
                 // Edit entry in JSON file
-                _logic.EditArt(newArt.id, newArt);
+                int res = _logic.EditArt(newArt.id, newArt);
                 this.isEditReg = false;
                 return;
             }
@@ -199,13 +201,14 @@ namespace BestefarsBilder
 
             // Setting text on the GroupBox
             groupBox1.Text = "Registrer nytt bilde";
-            txtbxID.Text = GetUniqueID().ToString();
+            txtbxID.Text = _logic.GetUniqueId().ToString();
             ClearTextBoxes();
             FormStyleRegister();        // Styling the form to registering mode
         }
 
 
         // Should return a unique ID that is not present in the JSON file
+        /*
         private int GetUniqueID()
         {
             string jsonString = File.ReadAllText(jsonPath);
@@ -214,6 +217,7 @@ namespace BestefarsBilder
             int max = ids.Max();
             return max + 1;
         }
+        */
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
