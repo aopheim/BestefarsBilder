@@ -15,12 +15,42 @@ namespace BestefarsBilder
         private Color warningColor = Color.Red;
         private List<TextBox> txtBoxes;
         private List<ComboBox> comboBoxes;
+        private Form1 _form;
 
 
-        public Graphics()
+        public Graphics(Form1 f)
         {
-            throw new NotImplementedException();
+            txtBoxes = f.GetTextBoxes();
+            comboBoxes = f.GetComboBoxes();
         }
 
+
+        // Sets all text and combobox fields to readonly
+        public void DisableFields()
+        {
+            foreach (TextBox txt in txtBoxes)
+            {
+                txt.ReadOnly = true;
+            }
+
+            foreach (ComboBox cmb in comboBoxes)
+            {
+                cmb.Enabled = false;
+            }
+
+        }
+
+        public void EnableFields()
+        {
+            foreach (TextBox txt in txtBoxes)
+            {
+                txt.ReadOnly = false;
+            }
+
+            foreach (ComboBox cmb in comboBoxes)
+            {
+                cmb.Enabled = true;
+            };
+        }
     }
 }

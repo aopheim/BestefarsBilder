@@ -44,7 +44,17 @@ namespace BestefarsBilder
             jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\lib\kunst.json";
             txtbxJsonPath.Text = jsonPath;
             _logic = new Logic(new Storage(jsonPath));
-            _graphics = new Graphics();
+            _graphics = new Graphics(this);
+        }
+
+        public List<TextBox> GetTextBoxes()
+        {
+            return txtBoxes;
+        }
+
+        public List<ComboBox> GetComboBoxes()
+        {
+            return comboBoxes;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -92,6 +102,8 @@ namespace BestefarsBilder
 
         }
 
+        /*
+
         // Sets all text and combobox fields to readonly
         private void DisableFields()
         {
@@ -119,6 +131,7 @@ namespace BestefarsBilder
                 cmb.Enabled = true;
             };
         }
+        */
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -341,7 +354,7 @@ namespace BestefarsBilder
 
             btnSave.Enabled = false;        // Unabling the save button if in read mode.
             txtbxID.ReadOnly = false;       // Enabling user to enter ID
-            DisableFields();        // Disabling all text fields and comboboxes
+            _graphics.DisableFields();        // Disabling all text fields and comboboxes
 
             if (!IsJsonFile())
             {
