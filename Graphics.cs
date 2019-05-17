@@ -10,30 +10,34 @@ namespace BestefarsBilder
 {
     class Graphics
     {
-        private Color inactiveColor = SystemColors.InactiveCaption;
-        private Color activeColor = SystemColors.Window;
-        private Color warningColor = Color.Red;
-        private List<TextBox> txtBoxes;
-        private List<ComboBox> comboBoxes;
+        private Color _inactiveColor = SystemColors.InactiveCaption;
+        private Color _activeColor = SystemColors.Window;
+        private Color _warningColor = Color.Red;
+        private Button _btnSave;
+        private List<TextBox> _txtBoxes;
+        private TextBox _txtbxId;
+        private List<ComboBox> _comboBoxes;
         private ArtForm _form;
 
 
         public Graphics(IArtForm f)
         {
-            txtBoxes = f.GetTextBoxes();
-            comboBoxes = f.GetComboBoxes();
+            _txtBoxes = f.GetTextBoxes();
+            _txtbxId = f.GetTxtBxId();
+            _btnSave = f.GetButtonSave();
+            _comboBoxes = f.GetComboBoxes();
         }
 
 
         // Sets all text and combobox fields to readonly
         public void DisableFields()
         {
-            foreach (TextBox txt in txtBoxes)
+            foreach (TextBox txt in _txtBoxes)
             {
                 txt.ReadOnly = true;
             }
 
-            foreach (ComboBox cmb in comboBoxes)
+            foreach (ComboBox cmb in _comboBoxes)
             {
                 cmb.Enabled = false;
             }
@@ -42,15 +46,45 @@ namespace BestefarsBilder
 
         public void EnableFields()
         {
-            foreach (TextBox txt in txtBoxes)
+            foreach (TextBox txt in _txtBoxes)
             {
                 txt.ReadOnly = false;
             }
 
-            foreach (ComboBox cmb in comboBoxes)
+            foreach (ComboBox cmb in _comboBoxes)
             {
                 cmb.Enabled = true;
             };
         }
+
+        public Color GetInActiveColor()
+        {
+            return _inactiveColor;
+        }
+
+        public Color GetActiveColor()
+        {
+            return _activeColor;
+        }
+
+        public Color GetWarningColor()
+        {
+            return _warningColor;
+        }
+
+
+        /// <summary>
+        /// Styling form for adding new registration
+        /// </summary>
+        public void FormStyleAdd()
+        {
+            _txtbxId.BackColor = _inactiveColor;
+            _txtbxId.ReadOnly = true;  // Disabling ID field
+            foreach(TextBox bx in _txtBoxes) { bx.BackColor = _activeColor; };
+            foreach(ComboBox cbx in _comboBoxes) { cbx.BackColor = _activeColor; };
+            EnableFields();
+            _btnSave.Enabled = true;  // Enabling save button
+        }
+        
     }
 }

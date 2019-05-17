@@ -15,15 +15,15 @@ namespace BestefarsBilder
 {
     public partial class ArtForm : Form, IArtForm
     {
-        private bool isNewReg = false;
-        private bool isReadReg = false;
-        private bool isEditReg = false;
-        private Color inactiveColor = SystemColors.InactiveCaption;
-        private Color activeColor = SystemColors.Window;
-        private Color warningColor = Color.Red;
-        private string jsonPath = "";
-        private List<TextBox> txtBoxes;
-        private List<ComboBox> comboBoxes;
+        private bool _isNewReg = false;
+        private bool _isReadReg = false;
+        private bool _isEditReg = false;
+        private Color _inactiveColor;
+        private Color _activeColor;
+        private Color _warningColor;
+        private string _jsonPath = "";
+        private List<TextBox> _txtBoxes;
+        private List<ComboBox> _comboBoxes;
         private Logic _logic;
         private Graphics _graphics;
 
@@ -33,28 +33,43 @@ namespace BestefarsBilder
         public ArtForm()
         {
             InitializeComponent();
-            txtBoxes = new List<TextBox>()
+            _txtBoxes = new List<TextBox>()
             {
                 txtbxTitle, txtbxYear, txtbxComment
             };
-            comboBoxes = new List<ComboBox>
+            _comboBoxes = new List<ComboBox>
             {
                 cmbxArtForm, cmbxExhibition, cmbxDimensions
             };
-            jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\lib\kunst.json";
-            txtbxJsonPath.Text = jsonPath;
-            _logic = new Logic(new Storage(jsonPath));
+            _jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\lib\kunst.json";
+            txtbxJsonPath.Text = _jsonPath;
+            _logic = new Logic(new Storage(_jsonPath));
             _graphics = new Graphics(this);
+
+            // Defining colors
+            _inactiveColor = _graphics.GetInActiveColor();
+            _activeColor = _graphics.GetActiveColor();
+            _warningColor = _graphics.GetWarningColor();
         }
 
         public List<TextBox> GetTextBoxes()
         {
-            return txtBoxes;
+            return _txtBoxes;
+        }
+
+        public Button GetButtonSave()
+        {
+            return btnSave;
         }
 
         public List<ComboBox> GetComboBoxes()
         {
-            return comboBoxes;
+            return _comboBoxes;
+        }
+
+        public TextBox GetTxtBxId()
+        {
+            return txtbxID;
         }
 
 
@@ -103,37 +118,7 @@ namespace BestefarsBilder
 
         }
 
-        /*
-
-        // Sets all text and combobox fields to readonly
-        private void DisableFields()
-        {
-            foreach (TextBox txt in txtBoxes)
-            {
-                txt.ReadOnly = true;
-            }
-
-            foreach (ComboBox cmb in comboBoxes)
-            {
-                cmb.Enabled = false;
-            }
-
-        }
-
-        private void EnableTextFields()
-        {
-            foreach (TextBox txt in txtBoxes)
-            {
-                txt.ReadOnly = false;
-            }
-
-            foreach (ComboBox cmb in comboBoxes)
-            {
-                cmb.Enabled = true;
-            };
-        }
-        */
-
+        
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!IsJsonFile())
@@ -161,19 +146,19 @@ namespace BestefarsBilder
                 comment = comment,
             };
 
-            if (this.isNewReg == true) // Registration is to be appended to the JSON file
+            if (this._isNewReg == true) // Registration is to be appended to the JSON file
             {
                 _logic.AddArt(newArt);
-                this.isNewReg = false;      // Resetting boolean.
+                this._isNewReg = false;      // Resetting boolean.
                 linkRead_LinkClicked(1, new LinkLabelLinkClickedEventArgs(lnkRead.Links[0]));           // Simulating that the user clicked the read button for resetting styling.
                 return;
             }
 
-            if (this.isEditReg == true)
+            if (this._isEditReg == true)
             {
                 // Edit entry in JSON file
                 int res = _logic.EditArt(newArt.id, newArt);
-                this.isEditReg = false;
+                this._isEditReg = false;
                 return;
             }
 
@@ -205,9 +190,9 @@ namespace BestefarsBilder
         {
 
 
-            this.isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
-            this.isReadReg = false;
-            this.isEditReg = false;
+            this._isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
+            this._isReadReg = false;
+            this._isEditReg = false;
             // Changing background color of link
             lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
@@ -217,7 +202,7 @@ namespace BestefarsBilder
             groupBox1.Text = "Registrer nytt bilde";
             txtbxID.Text = _logic.GetUniqueId().ToString();
             ClearTextBoxes();
-            FormStyleRegister();        // Styling the form to registering mode
+            _graphics.FormStyleAdd();        // Styling the form to registering mode
         }
 
 
@@ -236,9 +221,9 @@ namespace BestefarsBilder
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // Resetting the other boolean values
-            this.isReadReg = true;
-            this.isEditReg = false;
-            this.isNewReg = false;
+            this._isReadReg = true;
+            this._isEditReg = false;
+            this._isNewReg = false;
             // Changing background color of link
             lnkRead.BackColor = System.Drawing.Color.PaleGreen;
             lnkRegister.BackColor = SystemColors.Control;
@@ -251,9 +236,9 @@ namespace BestefarsBilder
 
         private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.isEditReg = true;
-            this.isNewReg = false;
-            this.isReadReg = false;
+            this._isEditReg = true;
+            this._isNewReg = false;
+            this._isReadReg = false;
             // Changing background color of link
             lnkEdit.BackColor = System.Drawing.Color.PaleGreen;
             lnkRead.BackColor = SystemColors.Control;
@@ -264,38 +249,13 @@ namespace BestefarsBilder
             FormStyleEdit();
         }
 
-        // Styles the form for acctepting new registrations.
-        private void FormStyleRegister()
-        {
-            // Setting colors
-            txtbxID.BackColor = inactiveColor;
-            txtbxTitle.BackColor = activeColor;
-            cmbxArtForm.BackColor = activeColor;
-            cmbxExhibition.BackColor = activeColor;
-            cmbxDimensions.BackColor = activeColor;
-            txtbxYear.BackColor = activeColor;
-            txtbxComment.BackColor = activeColor;
-
-
-            btnSave.Enabled = true;  // Enabling save button
-            txtbxID.ReadOnly = true;  // Disabling ID field
-            _graphics.EnableFields();     // Enabling the other fields
-            if (!IsJsonFile())
-            {
-                return;
-            }
-
-
-
-
-        }
 
         private bool IsJsonFile()
         {
             if (txtbxJsonPath.Text.Length < 1)
             {
                 txtbxConsole.Text = "Du må velge en biblioteksfil.";
-                txtbxConsole.ForeColor = warningColor;
+                txtbxConsole.ForeColor = _warningColor;
                 return false;
             }
             else
@@ -343,13 +303,13 @@ namespace BestefarsBilder
         private void FormStyleRead()
         {
             // Setting colors
-            txtbxID.BackColor = activeColor;
-            txtbxTitle.BackColor = inactiveColor;
-            cmbxArtForm.BackColor = inactiveColor;
-            cmbxExhibition.BackColor = inactiveColor;
-            cmbxDimensions.BackColor = inactiveColor;
-            txtbxYear.BackColor = inactiveColor;
-            txtbxComment.BackColor = inactiveColor;
+            txtbxID.BackColor = _activeColor;
+            txtbxTitle.BackColor = _inactiveColor;
+            cmbxArtForm.BackColor = _inactiveColor;
+            cmbxExhibition.BackColor = _inactiveColor;
+            cmbxDimensions.BackColor = _inactiveColor;
+            txtbxYear.BackColor = _inactiveColor;
+            txtbxComment.BackColor = _inactiveColor;
 
 
 
@@ -388,13 +348,13 @@ namespace BestefarsBilder
         // Changes style of the form to "registering" if enter key is pressed.
         private void TxtbxID_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && isEditReg)
+            if (e.KeyCode == Keys.Enter && _isEditReg)
             {
-                FormStyleRegister();
+                _graphics.FormStyleAdd();
                 FormContentRegister(Int32.Parse(txtbxID.Text));
                 return;
             }
-            if (e.KeyCode == Keys.Enter && isReadReg)
+            if (e.KeyCode == Keys.Enter && _isReadReg)
             {
                 // Setting text field data if the ID is known.
                 FormContentRegister(Int32.Parse(txtbxID.Text));
@@ -426,9 +386,9 @@ namespace BestefarsBilder
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txtbxJsonPath.Text = openFileDialog1.FileName;
-                this.jsonPath = openFileDialog1.FileName;
+                _jsonPath = openFileDialog1.FileName;
                 txtbxJsonPath.ReadOnly = true;
-                txtbxJsonPath.BackColor = inactiveColor;
+                txtbxJsonPath.BackColor = _inactiveColor;
             }
         }
     }

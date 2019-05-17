@@ -10,6 +10,8 @@ namespace BestefarsBilder
     public interface IArtForm
     {
         List<TextBox> GetTextBoxes();
+        TextBox GetTxtBxId();
+        Button GetButtonSave();
         List<ComboBox> GetComboBoxes();
 
     }
