@@ -15,10 +15,10 @@ namespace BestefarsBilder
         private Color warningColor = Color.Red;
         private List<TextBox> txtBoxes;
         private List<ComboBox> comboBoxes;
-        private Form1 _form;
+        private ArtForm _form;
 
 
-        public Graphics(Form1 f)
+        public Graphics(IArtForm f)
         {
             txtBoxes = f.GetTextBoxes();
             comboBoxes = f.GetComboBoxes();

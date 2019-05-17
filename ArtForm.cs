@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace BestefarsBilder
 {
-    public partial class Form1 : Form
+    public partial class ArtForm : Form, IArtForm
     {
         private bool isNewReg = false;
         private bool isReadReg = false;
@@ -30,7 +30,7 @@ namespace BestefarsBilder
 
 
         // Constructor
-        public Form1()
+        public ArtForm()
         {
             InitializeComponent();
             txtBoxes = new List<TextBox>()
@@ -56,6 +56,7 @@ namespace BestefarsBilder
         {
             return comboBoxes;
         }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -278,7 +279,7 @@ namespace BestefarsBilder
 
             btnSave.Enabled = true;  // Enabling save button
             txtbxID.ReadOnly = true;  // Disabling ID field
-            EnableTextFields();     // Enabling the other fields
+            _graphics.EnableFields();     // Enabling the other fields
             if (!IsJsonFile())
             {
                 return;
