@@ -59,7 +59,9 @@ namespace BestefarsBilder.Test
         {
             Art editedArt = new Art() { id = 1, title = "EditedTitle" };
             _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y[0].title == "EditedTitle")));
-            _logic.EditArt(1, editedArt);
+            _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Count() == 3)));
+            int res = _logic.EditArt(1, editedArt);
+            Assert.AreEqual(1, res);
             
             _storage.VerifyAll();
         }
@@ -67,7 +69,16 @@ namespace BestefarsBilder.Test
         [TestMethod]
         public void EditArt_BadId()
         {
-            throw new NotImplementedException();
+            Art editedArt = new Art() { id = 4, title = "BadID" };
+            int res = _logic.EditArt(editedArt.id, editedArt);
+            Assert.AreEqual(res, 0);
+        }
+
+        [TestMethod]
+        public void GetUniqueId()
+        {
+            int id = _logic.GetUniqueId();
+            Assert.AreEqual(4, id);
         }
     }
 }
