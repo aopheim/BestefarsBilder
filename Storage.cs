@@ -20,7 +20,9 @@ namespace BestefarsBilder
             string jsonString = File.ReadAllText(_jsonPath);
             return JsonConvert.DeserializeObject<List<Art>>(jsonString);
         }
+
         public void PutInStorage(IEnumerable<Art> arts) {
+            arts.ToList().OrderBy(x => x.id);
             string newJson = JsonConvert.SerializeObject(arts, Formatting.Indented);
             File.WriteAllText(_jsonPath, newJson);
         }
