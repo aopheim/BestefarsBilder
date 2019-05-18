@@ -1,18 +1,41 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System.IO;
 
 namespace BestefarsBilder.Test
 {
     [TestClass]
     public class StorageTests
     {
+        private Storage _storage;
+        private Art _art1, _art2, _art3;
+        private List<Art> _arts;
+
+
+        [TestInitialize]
+        public void SetUp()
+        {
+            _storage = new Storage("TestStorage.json");
+            _art1 = new Art() { id = 1 };
+            _art2 = new Art() { id = 2 };
+            _art3 = new Art() { id = 3 };
+            _arts = new List<Art> { _art1, _art2, _art3 };
+        }
+
+        [TestMethod]
+        public void PutInStorage()
+        {
+            throw new NotImplementedException();
+        }
+
         [TestMethod]
         public void GetFromStorage()
         {
-            var storage = new Storage("TestStorage.json");
-
-            var arts = storage.GetFromStorage().OrderBy(x => x.id).ToArray();
+            var arts = _storage.GetFromStorage().ToList();
 
             Assert.AreEqual(3, arts.Count());
 
