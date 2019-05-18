@@ -35,7 +35,7 @@ namespace BestefarsBilder
             InitializeComponent();
             _txtBoxes = new List<TextBox>()
             {
-                txtbxID, txtbxTitle, txtbxYear, txtbxComment
+                txtbxId, txtbxTitle, txtbxYear, txtbxComment
             };
             _comboBoxes = new List<ComboBox>
             {
@@ -67,9 +67,14 @@ namespace BestefarsBilder
             return _comboBoxes;
         }
 
+        public List<LinkLabel> GetLinkLabels()
+        {
+            return new List<LinkLabel>() { lnkRegister, lnkRead, lnkEdit };
+        }
+
         public TextBox GetTxtBxId()
         {
-            return txtbxID;
+            return txtbxId;
         }
 
 
@@ -147,8 +152,6 @@ namespace BestefarsBilder
 
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
-
             this._isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
             this._isReadReg = false;
             this._isEditReg = false;
@@ -159,7 +162,7 @@ namespace BestefarsBilder
 
             // Setting text on the GroupBox
             groupBox1.Text = "Registrer nytt bilde";
-            txtbxID.Text = _logic.GetUniqueId().ToString();
+            txtbxId.Text = _logic.GetUniqueId().ToString();
             ClearTextBoxes();
             _graphics.FormStyleAdd();        // Styling the form to registering mode
         }
@@ -262,7 +265,7 @@ namespace BestefarsBilder
         private void FormStyleRead()
         {
             // Setting colors
-            txtbxID.BackColor = _activeColor;
+            txtbxId.BackColor = _activeColor;
             txtbxTitle.BackColor = _inactiveColor;
             cmbxArtForm.BackColor = _inactiveColor;
             cmbxExhibition.BackColor = _inactiveColor;
@@ -273,7 +276,7 @@ namespace BestefarsBilder
 
 
             btnSave.Enabled = false;        // Unabling the save button if in read mode.
-            txtbxID.ReadOnly = false;       // Enabling user to enter ID
+            txtbxId.ReadOnly = false;       // Enabling user to enter ID
             _graphics.DisableFields();        // Disabling all text fields and comboboxes
 
             if (!IsJsonFile())
@@ -281,16 +284,16 @@ namespace BestefarsBilder
                 return;
             }
 
-            txtbxID.KeyUp += TxtbxID_KeyUp;     // Binding event. 
-            txtbxID.KeyDown += TxtbxID_KeyDown;
+            txtbxId.KeyUp += TxtbxID_KeyUp;     // Binding event. 
+            txtbxId.KeyDown += TxtbxID_KeyDown;
         }
 
         private void FormStyleEdit()
         {
             // Styles the form for editing entries
             FormStyleRead();
-            txtbxID.KeyUp += TxtbxID_KeyUp;     // Binding event. 
-            txtbxID.KeyDown += TxtbxID_KeyDown;         // Turning off sound when hitting enter.
+            txtbxId.KeyUp += TxtbxID_KeyUp;     // Binding event. 
+            txtbxId.KeyDown += TxtbxID_KeyDown;         // Turning off sound when hitting enter.
         }
 
 
@@ -310,13 +313,13 @@ namespace BestefarsBilder
             if (e.KeyCode == Keys.Enter && _isEditReg)
             {
                 _graphics.FormStyleAdd();
-                FormContentRegister(Int32.Parse(txtbxID.Text));
+                FormContentRegister(Int32.Parse(txtbxId.Text));
                 return;
             }
             if (e.KeyCode == Keys.Enter && _isReadReg)
             {
                 // Setting text field data if the ID is known.
-                FormContentRegister(Int32.Parse(txtbxID.Text));
+                FormContentRegister(Int32.Parse(txtbxId.Text));
             }
         }
 

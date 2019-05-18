@@ -21,7 +21,7 @@ namespace BestefarsBilder
             List<TextBox> txtboxes = form.GetTextBoxes();
             List<ComboBox> comboBoxes = form.GetComboBoxes();
 
-            int id = Int32.Parse(txtboxes.Find(x => x.Name == "txtbxID").Text);
+            int id = Int32.Parse(txtboxes.Find(x => x.Name == "txtbxId").Text);
             string title = txtboxes.Find(x => x.Name == "txtbxTitle").Text;
             string artform = comboBoxes.Find(x => x.Name == "cmbxArtForm").Text;
             string exhibition = comboBoxes.Find(x => x.Name == "cmbxExhibition").Text;

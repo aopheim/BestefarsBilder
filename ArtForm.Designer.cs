@@ -40,7 +40,7 @@
             this.cmbxArtForm = new System.Windows.Forms.ComboBox();
             this.lblForm = new System.Windows.Forms.Label();
             this.txtbxTitle = new System.Windows.Forms.TextBox();
-            this.txtbxID = new System.Windows.Forms.TextBox();
+            this.txtbxId = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
@@ -68,7 +68,7 @@
             this.groupBox1.Controls.Add(this.cmbxArtForm);
             this.groupBox1.Controls.Add(this.lblForm);
             this.groupBox1.Controls.Add(this.txtbxTitle);
-            this.groupBox1.Controls.Add(this.txtbxID);
+            this.groupBox1.Controls.Add(this.txtbxId);
             this.groupBox1.Controls.Add(this.lblTitle);
             this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Location = new System.Drawing.Point(33, 156);
@@ -196,17 +196,17 @@
             this.txtbxTitle.TabIndex = 3;
             this.txtbxTitle.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // txtbxID
+            // txtbxId
             // 
-            this.txtbxID.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtbxID.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtbxID.Location = new System.Drawing.Point(171, 30);
-            this.txtbxID.Name = "txtbxID";
-            this.txtbxID.ReadOnly = true;
-            this.txtbxID.Size = new System.Drawing.Size(208, 26);
-            this.txtbxID.TabIndex = 2;
-            this.txtbxID.TabStop = false;
-            this.txtbxID.WordWrap = false;
+            this.txtbxId.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtbxId.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtbxId.Location = new System.Drawing.Point(171, 30);
+            this.txtbxId.Name = "txtbxId";
+            this.txtbxId.ReadOnly = true;
+            this.txtbxId.Size = new System.Drawing.Size(208, 26);
+            this.txtbxId.TabIndex = 2;
+            this.txtbxId.TabStop = false;
+            this.txtbxId.WordWrap = false;
             // 
             // lblTitle
             // 
@@ -317,7 +317,7 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Angi biblioteksfil";
             // 
-            // Form1
+            // ArtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -332,7 +332,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "ArtForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -349,7 +349,7 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.TextBox txtbxTitle;
-        private System.Windows.Forms.TextBox txtbxID;
+        private System.Windows.Forms.TextBox txtbxId;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblForm;
         private System.Windows.Forms.ComboBox cmbxArtForm;

@@ -13,5 +13,6 @@ namespace BestefarsBilder
         TextBox GetTxtBxId();
         Button GetButtonSave();
         List<ComboBox> GetComboBoxes();
+        List<LinkLabel> GetLinkLabels();
     }
 }

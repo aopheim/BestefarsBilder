@@ -13,11 +13,16 @@ namespace BestefarsBilder
         private Color _inactiveColor = SystemColors.InactiveCaption;
         private Color _activeColor = SystemColors.Window;
         private Color _warningColor = Color.Red;
+        private Color _backgroundColor = SystemColors.Control;
+        private Color _activeLinkColor = System.Drawing.Color.PaleGreen;
+
         private Button _btnSave;
         private List<TextBox> _txtBoxes;
         private TextBox _txtbxId;
         private List<ComboBox> _comboBoxes;
         private ArtForm _form;
+        private LinkLabel _lnkAdd, _lnkRead, _lnkEdit;
+
 
 
         public Graphics(IArtForm f)
@@ -26,6 +31,9 @@ namespace BestefarsBilder
             _txtbxId = f.GetTxtBxId();
             _btnSave = f.GetButtonSave();
             _comboBoxes = f.GetComboBoxes();
+            _lnkAdd = f.GetLinkLabels().Find(x => x.Name == "lnkRegister");
+            _lnkRead = f.GetLinkLabels().Find(x => x.Name == "lnkRead");
+            _lnkEdit = f.GetLinkLabels().Find(x => x.Name == "lnkEdit");
         }
 
 
@@ -44,6 +52,16 @@ namespace BestefarsBilder
 
         }
 
+        public void DisableTextBox(TextBox t)
+        {
+            t.ReadOnly = true;
+        }
+
+        public void EnableTextBox(TextBox txtbx)
+        {
+            txtbx.ReadOnly = false;
+        }
+        
         public void EnableFields()
         {
             foreach (TextBox txt in _txtBoxes)
@@ -74,15 +92,27 @@ namespace BestefarsBilder
 
 
         /// <summary>
-        /// Styling form for adding new registration
+        /// Styling form for adding new registration.
         /// </summary>
         public void FormStyleAdd()
         {
+            // Changing background color of link
+            _lnkAdd.BackColor = _activeLinkColor;
+            _lnkRead.BackColor = _backgroundColor;
+            _lnkEdit.BackColor = _backgroundColor;
+
+            EnableFields();     // Enabling all fields
             _txtbxId.BackColor = _inactiveColor;
-            _txtbxId.ReadOnly = true;  // Disabling ID field
-            foreach(TextBox bx in _txtBoxes) { bx.BackColor = _activeColor; };
+            DisableTextBox(_txtbxId);       // Disabling the id text box
+            foreach(TextBox bx in _txtBoxes)
+            {
+                if (bx.Name == "txtbxId")
+                {
+                    continue;
+                }
+                bx.BackColor = _activeColor;
+            };
             foreach(ComboBox cbx in _comboBoxes) { cbx.BackColor = _activeColor; };
-            EnableFields();
             _btnSave.Enabled = true;  // Enabling save button
         }
         
