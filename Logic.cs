@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BestefarsBilder
 {
@@ -13,6 +14,32 @@ namespace BestefarsBilder
         public Logic(IStorage s)
         {
             _storage = s;
+        }
+
+        public Art GetArtFromForm(IArtForm form)
+        {
+            List<TextBox> txtboxes = form.GetTextBoxes();
+            List<ComboBox> comboBoxes = form.GetComboBoxes();
+
+            int id = Int32.Parse(txtboxes.Find(x => x.Name == "txtbxID").Text);
+            string title = txtboxes.Find(x => x.Name == "txtbxTitle").Text;
+            string artform = comboBoxes.Find(x => x.Name == "cmbxArtForm").Text;
+            string exhibition = comboBoxes.Find(x => x.Name == "cmbxExhibition").Text;
+            string dimensions = comboBoxes.Find(x => x.Name == "cmbxDimensions").Text;
+            string year = txtboxes.Find(x => x.Name == "txtbxYear").Text;       // Saving as string makes it possible to save no year as ""
+            string comment = txtboxes.Find(x => x.Name == "txtbxComment").Text;
+
+            Art a = new Art
+            {
+                id = id,
+                title = title,
+                artform = artform,
+                exhibition = exhibition,
+                dimensions = dimensions,
+                year = year,
+                comment = comment,
+            };
+            return a;
         }
 
         public Art GetArtPostById(int id)

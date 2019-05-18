@@ -2,7 +2,6 @@ C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\bin\Debug\BestefarsBilder.exe
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\bin\Debug\BestefarsBilder.pdb
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.csprojAssemblyReference.cache
-C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.Form1.resources
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.Properties.Resources.resources
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.csproj.GenerateResource.cache
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.csproj.CoreCompileInputs.cache
@@ -19,3 +18,4 @@ C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.application
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\bin\Debug\QRCoder.dll
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\bin\Debug\System.Drawing.Common.dll
+C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.ArtForm.resources

@@ -1,6 +1,6 @@
 ﻿namespace BestefarsBilder
 {
-    partial class Form1
+    partial class ArtForm
     {
         /// <summary>
         /// Required designer variable.
