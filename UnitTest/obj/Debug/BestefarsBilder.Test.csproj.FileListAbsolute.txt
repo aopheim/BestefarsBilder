@@ -108,7 +108,6 @@ C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Moq.dll
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\QRCoder.dll
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Newtonsoft.Json.dll
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\BestefarsBilder.pdb
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\BestefarsBilder.exe.config
@@ -119,7 +118,6 @@ C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Moq.xml
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Newtonsoft.Json.xml
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\obj\Debug\BestefarsBilder.Test.csproj.CopyComplete
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\obj\Debug\UnitTest.dll

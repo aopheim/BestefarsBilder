@@ -71,19 +71,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Art.cs" />
+    <Compile Include="Graphics.cs" />
+    <Compile Include="IArtForm.cs" />
     <Compile Include="IStorage.cs" />
     <Compile Include="Logic.cs" />
     <Compile Include="Storage.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="ArtForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ArtForm.Designer.cs">
+      <DependentUpon>ArtForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="ArtForm.resx">
+      <DependentUpon>ArtForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
