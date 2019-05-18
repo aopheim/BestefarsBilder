@@ -35,7 +35,7 @@ namespace BestefarsBilder
             InitializeComponent();
             _txtBoxes = new List<TextBox>()
             {
-                txtbxTitle, txtbxYear, txtbxComment
+                txtbxID, txtbxTitle, txtbxYear, txtbxComment
             };
             _comboBoxes = new List<ComboBox>
             {
@@ -125,28 +125,9 @@ namespace BestefarsBilder
             {
                 return;
             }
-            // Collecting user data
-            int id = Int32.Parse(txtbxID.Text);
-            string title = txtbxTitle.Text;
-            string artform = cmbxArtForm.Text;
-            string exhibition = cmbxExhibition.Text;
-            string dimensions = cmbxDimensions.Text;
-            string year = txtbxYear.Text;       // Saving as string makes it possible to save no year as ""
-            string comment = txtbxComment.Text;
+            Art newArt = _logic.GetArtFromForm(this);
 
-            // Creating art object.
-            Art newArt = new Art
-            {
-                id = id,
-                title = title,
-                artform = artform,
-                exhibition = exhibition,
-                dimensions = dimensions,
-                year = year,
-                comment = comment,
-            };
-
-            if (this._isNewReg == true) // Registration is to be appended to the JSON file
+            if (this._isNewReg == true) // Registration is to be added to the JSON file
             {
                 _logic.AddArt(newArt);
                 this._isNewReg = false;      // Resetting boolean.
@@ -161,28 +142,6 @@ namespace BestefarsBilder
                 this._isEditReg = false;
                 return;
             }
-
-
-
-            // Generating QR code
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            string qrString = "" +
-                "Katalognr.: " + id.ToString() + ", " +
-                "Tittel: " + title + ", " +
-                "Kunstform: " + artform + ", " +
-                "Utstilling: " + exhibition + ", " +
-                "Dimensjoner: " + dimensions + ", " +
-                "År: " + year + ", " +
-                "Kommentar: " + comment;
-
-
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrString, QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20);
-            qrCodeImage.Save(@"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\" + id.ToString() + ".bmp");
-
-            // Make fields non-editable 
-
             txtbxConsole.Text = "Kunst lagret";
         }
 
