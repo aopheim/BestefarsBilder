@@ -11,8 +11,12 @@ namespace BestefarsBilder
     {
         List<TextBox> GetTextBoxes();
         TextBox GetTxtBxId();
+        TextBox GetTxtBxWarning();
+        GroupBox GetGroupBox();
         Button GetButtonSave();
         List<ComboBox> GetComboBoxes();
         List<LinkLabel> GetLinkLabels();
+        Logic GetLogic();
+        Graphics GetGraphics();
     }
 }

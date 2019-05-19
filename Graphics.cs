@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace BestefarsBilder
 {
-    class Graphics
+    public class Graphics
     {
         private Color _inactiveColor = SystemColors.InactiveCaption;
         private Color _activeColor = SystemColors.Window;
@@ -18,26 +18,52 @@ namespace BestefarsBilder
 
         private Button _btnSave;
         private List<TextBox> _txtBoxes;
-        private TextBox _txtbxId;
+        private TextBox _txtbxId, _txtbxWarning;
+        private GroupBox _groupBox;
         private List<ComboBox> _comboBoxes;
-        private ArtForm _form;
+        private IArtForm _form;
         private LinkLabel _lnkAdd, _lnkRead, _lnkEdit;
 
-
+        // private Logic _logic;
 
         public Graphics(IArtForm f)
         {
             _txtBoxes = f.GetTextBoxes();
+            _groupBox = f.GetGroupBox();
             _txtbxId = f.GetTxtBxId();
+            _txtbxWarning = f.GetTxtBxWarning();
             _btnSave = f.GetButtonSave();
             _comboBoxes = f.GetComboBoxes();
             _lnkAdd = f.GetLinkLabels().Find(x => x.Name == "lnkRegister");
             _lnkRead = f.GetLinkLabels().Find(x => x.Name == "lnkRead");
             _lnkEdit = f.GetLinkLabels().Find(x => x.Name == "lnkEdit");
+            _form = f;
         }
 
 
-        // Sets all text and combobox fields to readonly
+        public void SetWarningText(string t)
+        {
+            _txtbxWarning.Text = t;
+        }
+
+        public void SetGroupBoxText(string t)
+        {
+            _groupBox.Text = t;
+        }
+
+
+        public void ClearText()
+        {
+            foreach(TextBox tbx in _txtBoxes)
+            {
+                tbx.Text = "";
+            }
+            foreach(ComboBox cbx in _comboBoxes)
+            {
+                cbx.Text = "";
+            }
+        }
+        
         public void DisableFields()
         {
             foreach (TextBox txt in _txtBoxes)
@@ -101,13 +127,16 @@ namespace BestefarsBilder
             _lnkRead.BackColor = _backgroundColor;
             _lnkEdit.BackColor = _backgroundColor;
 
-            EnableFields();     // Enabling all fields
-            _txtbxId.BackColor = _inactiveColor;
+            SetGroupBoxText("Registrer nytt bilde");
+            ClearText();
+            EnableFields();     
+            _txtbxId.Text = _form.GetLogic().GetUniqueId().ToString();
             DisableTextBox(_txtbxId);       // Disabling the id text box
             foreach(TextBox bx in _txtBoxes)
             {
                 if (bx.Name == "txtbxId")
                 {
+                    bx.BackColor = _inactiveColor;
                     continue;
                 }
                 bx.BackColor = _activeColor;

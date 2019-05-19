@@ -24,8 +24,9 @@ namespace BestefarsBilder
         private string _jsonPath = "";
         private List<TextBox> _txtBoxes;
         private List<ComboBox> _comboBoxes;
-        private Logic _logic;
+
         private Graphics _graphics;
+        private Logic _logic;
 
 
 
@@ -43,7 +44,7 @@ namespace BestefarsBilder
             };
             _jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\lib\kunst.json";
             txtbxJsonPath.Text = _jsonPath;
-            _logic = new Logic(new Storage(_jsonPath));
+            _logic = new Logic(new Storage(_jsonPath), this);
             _graphics = new Graphics(this);
 
             // Defining colors
@@ -67,9 +68,24 @@ namespace BestefarsBilder
             return _comboBoxes;
         }
 
+        public Graphics GetGraphics()
+        {
+            return _graphics;
+        }
+
+        public GroupBox GetGroupBox()
+        {
+            return groupBox1;
+        }
+
         public List<LinkLabel> GetLinkLabels()
         {
             return new List<LinkLabel>() { lnkRegister, lnkRead, lnkEdit };
+        }
+
+        public Logic GetLogic()
+        {
+            return this._logic;
         }
 
         public TextBox GetTxtBxId()
@@ -77,6 +93,10 @@ namespace BestefarsBilder
             return txtbxId;
         }
 
+        public TextBox GetTxtBxWarning()
+        {
+            return txtbxConsole;
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -126,59 +146,20 @@ namespace BestefarsBilder
         
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!IsJsonFile())
-            {
-                return;
-            }
-            Art newArt = _logic.GetArtFromForm(this);
-
-            if (this._isNewReg == true) // Registration is to be added to the JSON file
-            {
-                _logic.AddArt(newArt);
-                this._isNewReg = false;      // Resetting boolean.
-                linkRead_LinkClicked(1, new LinkLabelLinkClickedEventArgs(lnkRead.Links[0]));           // Simulating that the user clicked the read button for resetting styling.
-                return;
-            }
-
-            if (this._isEditReg == true)
-            {
-                // Edit entry in JSON file
-                int res = _logic.EditArt(newArt.id, newArt);
-                this._isEditReg = false;
-                return;
-            }
-            txtbxConsole.Text = "Kunst lagret";
+            _logic.OnSave();
+            linkRead_LinkClicked(1, new LinkLabelLinkClickedEventArgs(lnkRead.Links[0]));           // Simulating that the user clicked the read button for resetting styling.
         }
 
         private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this._isNewReg = true;       // Indicating this is a new registration. Should be appended to json file.
-            this._isReadReg = false;
-            this._isEditReg = false;
-            // Changing background color of link
-            lnkRegister.BackColor = System.Drawing.Color.PaleGreen;
-            lnkRead.BackColor = SystemColors.Control;
-            lnkEdit.BackColor = SystemColors.Control;
-
-            // Setting text on the GroupBox
-            groupBox1.Text = "Registrer nytt bilde";
-            txtbxId.Text = _logic.GetUniqueId().ToString();
-            ClearTextBoxes();
+            _logic.IsNewReg = true;
+            _logic.IsReadReg = false;
+            _logic.IsEditReg = false;
             _graphics.FormStyleAdd();        // Styling the form to registering mode
         }
 
 
-        // Should return a unique ID that is not present in the JSON file
-        /*
-        private int GetUniqueID()
-        {
-            string jsonString = File.ReadAllText(jsonPath);
-            List<Art> artworks = JsonConvert.DeserializeObject<List<Art>>(jsonString);
-            List<int> ids = artworks.Select(o => o.id).ToList();
-            int max = ids.Max();
-            return max + 1;
-        }
-        */
+    
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

@@ -31,7 +31,7 @@ namespace BestefarsBilder.Test
                     new Art(){ id = 2},
                     new Art(){ id = 3}
                 };
-            _txtbxId = new TextBox() { Text = "1", Name = "txtbxID"};
+            _txtbxId = new TextBox() { Text = "1", Name = "txtbxId"};
             _txtbxTitle = new TextBox() { Text = "Title", Name="txtbxTitle"};
             _txtbxYear = new TextBox() { Text = "1993", Name = "txtbxYear" };
             _txtbxComment = new TextBox() { Text = "Comment", Name = "txtbxComment" };
@@ -77,6 +77,13 @@ namespace BestefarsBilder.Test
             Assert.AreEqual("30x50", a.dimensions);
         }
 
+
+        [TestMethod]
+        public void OnSave()
+        {
+            _logic.OnSave();
+            throw new NotImplementedException();
+        }
 
         [TestMethod]
         public void AddArt()

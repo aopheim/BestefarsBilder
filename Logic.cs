@@ -7,13 +7,47 @@ using System.Windows.Forms;
 
 namespace BestefarsBilder
 {
-    class Logic
+    public class Logic
     {
-        IStorage _storage;
+        private IStorage _storage;
+        private IArtForm _form;
+        public bool IsNewReg { get; set; }
+        public bool IsReadReg { get; set; }
+        public bool IsEditReg { get; set; }
 
-        public Logic(IStorage s)
+        public Logic(IStorage s, IArtForm form)
         {
             _storage = s;
+            _form = form;
+        }
+
+        /// <summary>
+        /// Defining what actions to take when clicking the save button
+        /// </summary>
+        public void OnSave()
+        {
+            Art newArt = GetArtFromForm(_form);
+
+            if (IsNewReg ) // Registration is to be added to the JSON file
+            {
+                AddArt(newArt);
+                IsNewReg = false;      // Resetting boolean.
+                return;
+            }
+
+            if (IsEditReg == true)
+            {
+                // Edit entry in JSON file
+                int res = EditArt(newArt.id, newArt);
+                if (res == 0)
+                {
+                    _form.GetGraphics().SetWarningText("Redigerer en ugyldig ID");
+                    return;
+                }
+                IsEditReg = false;
+                return;
+            }
+            _form.GetGraphics().SetWarningText("Kunst lagret");
         }
 
         public Art GetArtFromForm(IArtForm form)
