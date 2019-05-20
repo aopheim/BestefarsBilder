@@ -31,7 +31,7 @@ namespace BestefarsBilder.Test
             _storage = new Mock<IStorage>(MockBehavior.Strict);
             _arts = new List<Art>()
             {
-                new Art(){ id = 1, title = "Title" },
+                new Art(){ id = 1, title = "OriginalTitle" },
                 new Art(){ id = 2},
                 new Art(){ id = 3}
             };
@@ -88,7 +88,7 @@ namespace BestefarsBilder.Test
         public void GetArtFromForm()
         {
             Art a = _logic.GetArtFromForm(_form.Object);
-            Assert.AreEqual(1, a.id);
+            Assert.AreEqual(4, a.id);
             Assert.AreEqual("Title", a.title);
             Assert.AreEqual("1993", a.year);
             Assert.AreEqual("Comment", a.comment);
@@ -108,10 +108,37 @@ namespace BestefarsBilder.Test
             _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Count() == 4)));
 
             _logic.OnSave();
+            Assert.AreEqual("Kunst lagret", _form.Object.GetTxtBxWarning().Text);
 
             _storage.VerifyAll();       // Not possible to verify two setups? Commenting out one passes the test
         }
             
+        [TestMethod]
+        public void OnSave_EditArt()
+        {
+            _logic.IsNewReg = false;
+            _logic.IsEditReg = true;
+            _logic.IsReadReg = false;
+
+            _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Count() == 3)));
+            _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Exists(z => z.title == "Title"))));
+            _txtbxId.Text = "1";        // Edit entry nr 1
+            _logic.OnSave();
+
+            Assert.AreEqual("Kunst lagret", _form.Object.GetTxtBxWarning().Text);
+        }
+
+        [TestMethod]
+        public void OnSave_EditArt_BadId()
+        {
+            _logic.IsNewReg = false;
+            _logic.IsEditReg = true;
+            _logic.IsReadReg = false;
+
+            _logic.OnSave();
+            Assert.AreEqual(3, _storage.Object.GetFromStorage().Count());
+            Assert.AreEqual("Redigerer en ugyldig ID", _form.Object.GetTxtBxWarning().Text);
+        }
 
         [TestMethod]
         public void AddArt()
