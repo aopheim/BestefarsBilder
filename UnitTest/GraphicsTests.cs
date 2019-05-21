@@ -38,7 +38,7 @@ namespace BestefarsBilder.Test
         {
             _arts = new List<Art>()
             {
-                new Art(){ id = 1 }
+                new Art(){ id = 1, title = "Title1", year = "1993" }
             };
             _form = new Mock<IArtForm>(MockBehavior.Strict);
             _storage = new Mock<IStorage>(MockBehavior.Strict);
@@ -63,8 +63,8 @@ namespace BestefarsBilder.Test
             _btnSave = new Button();
 
             _storage.Setup(x => x.GetFromStorage()).Returns(_arts);
-
             _logic = new Logic(_storage.Object, _form.Object);
+
 
             _form.Setup(x => x.GetTextBoxes()).Returns(_txtBoxes);
             _form.Setup(x => x.GetComboBoxes()).Returns(_comboBoxes);
@@ -75,7 +75,6 @@ namespace BestefarsBilder.Test
             _form.Setup(x => x.GetTxtBxWarning()).Returns(_txtbxWarning);
             _form.Setup(x => x.GetLogic()).Returns(_logic);
 
-            //_logic.Setup(x => x.GetUniqueId()).Returns(2);
             _graphics = new Graphics(_form.Object);
         }
 
@@ -124,6 +123,46 @@ namespace BestefarsBilder.Test
             Assert.AreEqual(_inactiveColor, _txtbxId.BackColor);
             Assert.AreEqual(true, _txtbxId.ReadOnly);
             Assert.AreEqual(true, _btnSave.Enabled);
+        }
+
+        [TestMethod]
+        public void FormStyleRead()
+        {
+            _graphics.FormStyleRead();
+
+            Assert.AreEqual(true, _form.Object.GetLogic().IsReadReg);
+            Assert.AreEqual(false, _form.Object.GetLogic().IsEditReg);
+            Assert.AreEqual(false, _form.Object.GetLogic().IsNewReg);
+            Assert.AreEqual(_activeLinkColor, _lnkRead.BackColor);
+            Assert.AreEqual(_backgroundColor, _lnkEdit.BackColor);
+            Assert.AreEqual(_backgroundColor, _lnkAdd.BackColor);
+            Assert.AreEqual("Se oppføring", _groupBox.Text);
+            foreach (TextBox tbx in _txtBoxes)
+            {
+                if (tbx.Name == "txtbxId")
+                {
+                    Assert.AreEqual(_activeColor, tbx.BackColor);
+                    Assert.AreEqual(false, tbx.ReadOnly);
+                    continue;
+                }
+                Assert.AreEqual(_inactiveColor, tbx.BackColor);
+                Assert.AreEqual(true, tbx.ReadOnly);
+            }
+            foreach(ComboBox cbx in _comboBoxes)
+            {
+                Assert.AreEqual(_inactiveColor, cbx.BackColor);
+                Assert.AreEqual(false, cbx.Enabled);
+            }
+
+            Assert.AreEqual(false, _btnSave.Enabled);
+        }
+
+        [TestMethod]
+        public void FillFields()
+        {
+            int id = 2;
+            _graphics.FillFields(id);
+
         }
     }
 }

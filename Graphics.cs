@@ -144,6 +144,44 @@ namespace BestefarsBilder
             foreach(ComboBox cbx in _comboBoxes) { cbx.BackColor = _activeColor; };
             _btnSave.Enabled = true;  // Enabling save button
         }
-        
+
+        public void FormStyleRead()
+        {
+            _form.GetLogic().IsReadReg = true;
+            _form.GetLogic().IsEditReg = false;
+            _form.GetLogic().IsNewReg = false;
+
+            _lnkRead.BackColor = _activeLinkColor;
+            _lnkAdd.BackColor = _backgroundColor;
+            _lnkEdit.BackColor = _backgroundColor;
+            _groupBox.Text = "Se oppføring";
+            foreach(TextBox tbx in _txtBoxes)
+            {
+                if (tbx.Name == "txtbxId")
+                {
+                    tbx.BackColor = _activeColor;
+                    tbx.ReadOnly = false;
+                    continue;
+                }
+                tbx.BackColor = _inactiveColor;
+                tbx.ReadOnly = true;
+            }
+            foreach (ComboBox cbx in _comboBoxes)
+            {
+                cbx.BackColor = _inactiveColor;
+                cbx.Enabled = false;
+            }
+            _btnSave.Enabled = false;
+        }
+
+        /// <summary>
+        /// Fill all text boxes and combo boxes with id
+        /// </summary>
+        /// <param name="id">Id of the Art object to fill fields with</param>
+        public void FillFields(int id)
+        {
+            Art a = _form.GetLogic().GetArtPostById(id);
+
+        }
     }
 }
