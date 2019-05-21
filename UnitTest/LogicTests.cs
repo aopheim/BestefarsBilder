@@ -154,12 +154,13 @@ namespace BestefarsBilder.Test
         [TestMethod]
         public void EditArt()
         {
-            _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y[0].title == "EditedTitle")));
+            _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Exists(z => z.title == "EditedTitle"))));
             _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Count() == 3)));
             Art editedArt = new Art() { id = 1, title = "EditedTitle" };
             int res = _logic.EditArt(1, editedArt);
             Assert.AreEqual(1, res);
             
+            // Not possible with two setups? Passes test if one of them are commented out. 
             _storage.VerifyAll();
         }
 

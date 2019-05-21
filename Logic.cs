@@ -19,6 +19,9 @@ namespace BestefarsBilder
         {
             _storage = s;
             _form = form;
+            IsNewReg = false;
+            IsReadReg = false;
+            IsEditReg = false;
         }
 
         /// <summary>
@@ -28,11 +31,10 @@ namespace BestefarsBilder
         {
             Art newArt = GetArtFromForm(_form);
 
-            if (IsNewReg ) // Registration is to be added to the JSON file
+            if (IsNewReg) // Registration is to be added to the JSON file
             {
                 AddArt(newArt);
                 IsNewReg = false;      // Resetting boolean.
-                return;
             }
 
             if (IsEditReg == true)
@@ -45,7 +47,6 @@ namespace BestefarsBilder
                     return;
                 }
                 IsEditReg = false;
-                return;
             }
             _form.GetGraphics().SetWarningText("Kunst lagret");
         }
