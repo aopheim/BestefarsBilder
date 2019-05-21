@@ -163,18 +163,10 @@ namespace BestefarsBilder
 
         private void linkRead_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            // Resetting the other boolean values
-            this._isReadReg = true;
-            this._isEditReg = false;
-            this._isNewReg = false;
-            // Changing background color of link
-            lnkRead.BackColor = System.Drawing.Color.PaleGreen;
-            lnkRegister.BackColor = SystemColors.Control;
-            lnkEdit.BackColor = SystemColors.Control;
+            _graphics.FormStyleRead();
 
-            // Setting text on GroupBox
-            groupBox1.Text = "Se oppføring";
-            FormStyleRead();
+            txtbxId.KeyUp += TxtbxID_KeyUp;     // Binding event. 
+            txtbxId.KeyDown += TxtbxID_KeyDown;
         }
 
         private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -241,34 +233,7 @@ namespace BestefarsBilder
             txtbxYear.Text = "";
             txtbxComment.Text = "";
         }
-
-        // Styles the form for reading registrations.
-        private void FormStyleRead()
-        {
-            // Setting colors
-            txtbxId.BackColor = _activeColor;
-            txtbxTitle.BackColor = _inactiveColor;
-            cmbxArtForm.BackColor = _inactiveColor;
-            cmbxExhibition.BackColor = _inactiveColor;
-            cmbxDimensions.BackColor = _inactiveColor;
-            txtbxYear.BackColor = _inactiveColor;
-            txtbxComment.BackColor = _inactiveColor;
-
-
-
-            btnSave.Enabled = false;        // Unabling the save button if in read mode.
-            txtbxId.ReadOnly = false;       // Enabling user to enter ID
-            _graphics.DisableFields();        // Disabling all text fields and comboboxes
-
-            if (!IsJsonFile())
-            {
-                return;
-            }
-
-            txtbxId.KeyUp += TxtbxID_KeyUp;     // Binding event. 
-            txtbxId.KeyDown += TxtbxID_KeyDown;
-        }
-
+        
         private void FormStyleEdit()
         {
             // Styles the form for editing entries
@@ -291,7 +256,7 @@ namespace BestefarsBilder
         // Changes style of the form to "registering" if enter key is pressed.
         private void TxtbxID_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && _isEditReg)
+            if (e.KeyCode == Keys.Enter && _logic.IsEditReg)
             {
                 _graphics.FormStyleAdd();
                 FormContentRegister(Int32.Parse(txtbxId.Text));
