@@ -15,12 +15,7 @@ namespace BestefarsBilder
 {
     public partial class ArtForm : Form, IArtForm
     {
-        private bool _isNewReg = false;
-        private bool _isReadReg = false;
-        private bool _isEditReg = false;
-        private Color _inactiveColor;
-        private Color _activeColor;
-        private Color _warningColor;
+        private Color _inactiveColor, _activeColor, _warningColor;
         private string _jsonPath = "";
         private List<TextBox> _txtBoxes;
         private List<ComboBox> _comboBoxes;
@@ -36,7 +31,7 @@ namespace BestefarsBilder
             InitializeComponent();
             _txtBoxes = new List<TextBox>()
             {
-                txtbxId, txtbxTitle, txtbxYear, txtbxComment
+                txtbxTitle, txtbxYear, txtbxComment
             };
             _comboBoxes = new List<ComboBox>
             {
@@ -88,7 +83,7 @@ namespace BestefarsBilder
             return this._logic;
         }
 
-        public TextBox GetTxtBxId()
+        public NumericUpDown GetTxtBxId()
         {
             return txtbxId;
         }
@@ -171,17 +166,7 @@ namespace BestefarsBilder
 
         private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this._isEditReg = true;
-            this._isNewReg = false;
-            this._isReadReg = false;
-            // Changing background color of link
-            lnkEdit.BackColor = System.Drawing.Color.PaleGreen;
-            lnkRead.BackColor = SystemColors.Control;
-            lnkRegister.BackColor = SystemColors.Control;
-
-            // Setting text on GroupBox:
-            groupBox1.Text = "Rediger oppføring";
-            FormStyleEdit();
+            _graphics.FormStyleEdit();
         }
 
 
@@ -198,50 +183,7 @@ namespace BestefarsBilder
                 return true;
             }
         }
-
-
-        // Filling in text boxes in form with data from the JSON file. 
-        // If id is not in JSON file, set all fields empty.
-        // id: ID to edit. 
-        private void FormContentRegister(int id)
-        {
-            var art = _logic.GetArtPostById(id);
-            if (art == null)
-                ClearTextBoxes();
-            else
-                FillTextBoxes(art);
-        }
-
-        // Setting all text boxes to content of foundItem
-        private void FillTextBoxes(Art foundItem)
-        {
-            txtbxTitle.Text = foundItem.title;
-            cmbxArtForm.Text = foundItem.artform;
-            cmbxExhibition.Text = foundItem.exhibition;
-            cmbxDimensions.Text = foundItem.dimensions;
-            txtbxYear.Text = foundItem.year;
-            txtbxComment.Text = foundItem.comment;
-        }
-
-        // Setting all text boxes to ""
-        private void ClearTextBoxes()
-        {
-            txtbxTitle.Text = "";
-            cmbxArtForm.Text = "";
-            cmbxExhibition.Text = "";
-            cmbxDimensions.Text = "";
-            txtbxYear.Text = "";
-            txtbxComment.Text = "";
-        }
         
-        private void FormStyleEdit()
-        {
-            // Styles the form for editing entries
-            FormStyleRead();
-            txtbxId.KeyUp += TxtbxID_KeyUp;     // Binding event. 
-            txtbxId.KeyDown += TxtbxID_KeyDown;         // Turning off sound when hitting enter.
-        }
-
 
         // Turning of the sound when pressing enter
         private void TxtbxID_KeyDown(object sender, KeyEventArgs e)
@@ -256,16 +198,21 @@ namespace BestefarsBilder
         // Changes style of the form to "registering" if enter key is pressed.
         private void TxtbxID_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && _logic.IsEditReg)
+            if (e.KeyCode == Keys.Enter)
             {
-                _graphics.FormStyleAdd();
-                FormContentRegister(Int32.Parse(txtbxId.Text));
-                return;
-            }
-            if (e.KeyCode == Keys.Enter && _isReadReg)
-            {
-                // Setting text field data if the ID is known.
-                FormContentRegister(Int32.Parse(txtbxId.Text));
+                if (_logic.IsEditReg)
+                {
+                    _graphics.FormStyleAdd();
+                    _graphics.FillFields(Int32.Parse(txtbxId.Text));
+                    return;
+                }
+                if (_logic.IsReadReg)
+                {
+                    // Setting text field data if the ID is known.
+                    _graphics.FormStyleRead();
+                    _graphics.FillFields(Int32.Parse(txtbxId.Text));
+                }
+
             }
         }
 
@@ -298,6 +245,11 @@ namespace BestefarsBilder
                 txtbxJsonPath.ReadOnly = true;
                 txtbxJsonPath.BackColor = _inactiveColor;
             }
+        }
+
+        private void txtbxComment_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
