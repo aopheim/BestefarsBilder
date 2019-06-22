@@ -40,7 +40,6 @@
             this.cmbxArtForm = new System.Windows.Forms.ComboBox();
             this.lblForm = new System.Windows.Forms.Label();
             this.txtbxTitle = new System.Windows.Forms.TextBox();
-            this.txtbxId = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
@@ -51,12 +50,15 @@
             this.txtbxJsonPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtbxId = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtbxId)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtbxId);
             this.groupBox1.Controls.Add(this.txtbxComment);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtbxYear);
@@ -68,7 +70,6 @@
             this.groupBox1.Controls.Add(this.cmbxArtForm);
             this.groupBox1.Controls.Add(this.lblForm);
             this.groupBox1.Controls.Add(this.txtbxTitle);
-            this.groupBox1.Controls.Add(this.txtbxId);
             this.groupBox1.Controls.Add(this.lblTitle);
             this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Location = new System.Drawing.Point(33, 156);
@@ -86,6 +87,7 @@
             this.txtbxComment.Name = "txtbxComment";
             this.txtbxComment.Size = new System.Drawing.Size(208, 130);
             this.txtbxComment.TabIndex = 13;
+            this.txtbxComment.TextChanged += new System.EventHandler(this.txtbxComment_TextChanged);
             // 
             // label4
             // 
@@ -196,18 +198,6 @@
             this.txtbxTitle.TabIndex = 3;
             this.txtbxTitle.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // txtbxId
-            // 
-            this.txtbxId.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtbxId.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtbxId.Location = new System.Drawing.Point(171, 30);
-            this.txtbxId.Name = "txtbxId";
-            this.txtbxId.ReadOnly = true;
-            this.txtbxId.Size = new System.Drawing.Size(208, 26);
-            this.txtbxId.TabIndex = 2;
-            this.txtbxId.TabStop = false;
-            this.txtbxId.WordWrap = false;
-            // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
@@ -317,6 +307,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Angi biblioteksfil";
             // 
+            // txtbxId
+            // 
+            this.txtbxId.Location = new System.Drawing.Point(171, 31);
+            this.txtbxId.Name = "txtbxId";
+            this.txtbxId.Size = new System.Drawing.Size(208, 26);
+            this.txtbxId.TabIndex = 14;
+            // 
             // ArtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -339,6 +336,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtbxId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,7 +347,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.TextBox txtbxTitle;
-        private System.Windows.Forms.TextBox txtbxId;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblForm;
         private System.Windows.Forms.ComboBox cmbxArtForm;
@@ -368,6 +365,7 @@
         private System.Windows.Forms.TextBox txtbxJsonPath;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.NumericUpDown txtbxId;
     }
 }
 
