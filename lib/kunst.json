@@ -7,5 +7,32 @@
     "dimensions": "test",
     "year": "test",
     "comment": "test"
+  },
+  {
+    "id": 2,
+    "title": "nr2",
+    "artform": "Collage",
+    "exhibition": "Utstilling 1",
+    "dimensions": "30x30",
+    "year": "1993",
+    "comment": ""
+  },
+  {
+    "id": 3,
+    "title": "nr3",
+    "artform": "nej",
+    "exhibition": "jne",
+    "dimensions": "30x30",
+    "year": "1993",
+    "comment": "heaef"
+  },
+  {
+    "id": 4,
+    "title": "nr4",
+    "artform": "hei",
+    "exhibition": "hei",
+    "dimensions": "hein",
+    "year": "hei",
+    "comment": "ie"
   }
 ]

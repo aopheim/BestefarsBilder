@@ -43,12 +43,12 @@ namespace BestefarsBilder
                 int res = EditArt(newArt.id, newArt);
                 if (res == 0)
                 {
-                    _form.GetGraphics().SetWarningText("Redigerer en ugyldig ID");
+                    _form.GetGraphics().SetTxtBxWarning("Redigerer en ugyldig ID");
                     return;
                 }
                 IsEditReg = false;
             }
-            _form.GetGraphics().SetWarningText("Kunst lagret");
+            _form.GetGraphics().SetTxtBxWarning("Kunst lagret");
         }
 
         public Art GetArtFromForm(IArtForm form)
