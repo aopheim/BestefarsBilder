@@ -18,7 +18,8 @@ namespace BestefarsBilder
 
         private Button _btnSave;
         private List<TextBox> _txtBoxes;
-        private TextBox _txtbxId, _txtbxWarning;
+        private TextBox _txtbxWarning;
+        private NumericUpDown _txtbxId;
         private GroupBox _groupBox;
         private List<ComboBox> _comboBoxes;
         private IArtForm _form;
@@ -39,12 +40,7 @@ namespace BestefarsBilder
             _lnkEdit = f.GetLinkLabels().Find(x => x.Name == "lnkEdit");
             _form = f;
         }
-
-
-        public void SetWarningText(string t)
-        {
-            _txtbxWarning.Text = t;
-        }
+        
 
         public void SetGroupBoxText(string t)
         {
@@ -78,7 +74,7 @@ namespace BestefarsBilder
 
         }
 
-        public void DisableTextBox(TextBox t)
+        public void DisableTextBox(NumericUpDown t)
         {
             t.ReadOnly = true;
         }
@@ -174,6 +170,28 @@ namespace BestefarsBilder
             _btnSave.Enabled = false;
         }
 
+
+        /// <summary>
+        /// Styles the form for editing entries
+        /// </summary>
+        public void FormStyleEdit()
+        {
+            this.FormStyleRead();           // Almost same design as for reading entries - using FormStyleRead
+                                            // and changing you the single parameters different. 
+            _form.GetLogic().IsReadReg = false;
+            _form.GetLogic().IsEditReg = true;
+            _form.GetLogic().IsNewReg = false;
+
+            _lnkEdit.BackColor = _activeLinkColor;
+            _lnkAdd.BackColor = _backgroundColor;
+            _lnkRead.BackColor = _backgroundColor;
+
+            _groupBox.Text = "Rediger oppføring";
+        }
+
+
+
+
         /// <summary>
         /// Fill all text boxes and combo boxes with id
         /// </summary>
@@ -182,6 +200,26 @@ namespace BestefarsBilder
         {
             Art a = _form.GetLogic().GetArtPostById(id);
 
+            if (a == null)
+            {
+                SetTxtBxWarning("Ingen oppføring med id " + id.ToString() + " funnet");
+                return;
+            }
+
+            _txtBoxes.Find(x => x.Name == "txtbxTitle").Text = a.title;
+            _txtBoxes.Find(x => x.Name == "txtbxYear").Text = a.year;
+            _txtBoxes.Find(x => x.Name == "txtbxComment").Text = a.comment;
+
+            _comboBoxes.Find(x => x.Name == "cmbxArtForm").Text = a.artform;
+            _comboBoxes.Find(x => x.Name == "cmbxExhibition").Text = a.exhibition;
+            _comboBoxes.Find(x => x.Name == "cmbxDimensions").Text = a.dimensions;   
         }
+
+        public void SetTxtBxWarning(string s)
+        {
+            _txtbxWarning.Text = s;
+        }
+
     }
+
 }
