@@ -15,5 +15,6 @@ namespace BestefarsBilder
         public string dimensions { get; set; }
         public string year { get; set; }
         public string comment { get; set; }
+        public int numImageFiles { get; set; }
     }
 }

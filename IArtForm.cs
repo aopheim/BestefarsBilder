@@ -13,9 +13,12 @@ namespace BestefarsBilder
         NumericUpDown GetTxtBxId();
         TextBox GetTxtBxWarning();
         GroupBox GetGroupBox();
+        PictureBox GetPictureBox();
         Button GetButtonSave();
         List<ComboBox> GetComboBoxes();
         List<LinkLabel> GetLinkLabels();
+        List<String> GetOrigImagePaths();
+        string GetImagesPath();
         Logic GetLogic();
         Graphics GetGraphics();
     }

@@ -19,8 +19,9 @@ namespace BestefarsBilder.Test
         private List<Art> _arts;
         private List<TextBox> _txtBoxes;
         private List<ComboBox> _comboBoxes;
-        private TextBox _txtbxTitle, _txtbxYear, _txtbxComment, _txtbxWarning;
+        private TextBox _txtbxTitle, _txtbxYear, _txtbxComment, _txtbxWarning, _imageFiles;
         private ComboBox _cmbxDimensions, _cmbxExhibition, _cmbxArtForm;
+        private PictureBox _pictureBox;
         private NumericUpDown _txtbxId;
         private GroupBox _groupBox;
         private LinkLabel _lnkAdd, _lnkRead, _lnkEdit;
@@ -46,7 +47,8 @@ namespace BestefarsBilder.Test
                     comment ="Comment1",
                     artform ="Collage",
                     dimensions="30x50",
-                    exhibition="Exhibition1"
+                    exhibition="Exhibition1",
+                    numImageFiles = 2
                 }
             };
             _form = new Mock<IArtForm>(MockBehavior.Strict);
@@ -56,6 +58,7 @@ namespace BestefarsBilder.Test
             _txtbxTitle = new TextBox() { Name = "txtbxTitle" };
             _txtbxYear = new TextBox() { Name = "txtbxYear" };
             _txtbxComment = new TextBox() { Name = "txtbxComment" };
+            _imageFiles = new TextBox() { Name = "imageFiles" };
             _cmbxDimensions = new ComboBox() { Name = "cmbxDimensions"};
             _cmbxArtForm = new ComboBox() { Name = "cmbxArtForm" };
             _cmbxExhibition = new ComboBox() { Name = "cmbxExhibition" };
@@ -66,8 +69,9 @@ namespace BestefarsBilder.Test
             _lnkEdit = new LinkLabel() { Name = "lnkEdit" };
             _lnkLabels = new List<LinkLabel>() { _lnkAdd, _lnkEdit, _lnkRead };
 
-            _txtBoxes = new List<TextBox> { _txtbxTitle, _txtbxYear, _txtbxComment };
+            _txtBoxes = new List<TextBox> { _txtbxTitle, _txtbxYear, _txtbxComment, _imageFiles };
             _comboBoxes = new List<ComboBox> { _cmbxArtForm, _cmbxDimensions, _cmbxExhibition };
+            _pictureBox = new PictureBox();
             _btnSave = new Button();
 
             _storage.Setup(x => x.GetFromStorage()).Returns(_arts);
@@ -79,8 +83,10 @@ namespace BestefarsBilder.Test
             _form.Setup(x => x.GetButtonSave()).Returns(_btnSave);
             _form.Setup(x => x.GetLinkLabels()).Returns(_lnkLabels);
             _form.Setup(x => x.GetGroupBox()).Returns(_groupBox);
+            _form.Setup(x => x.GetPictureBox()).Returns(_pictureBox);
             _form.Setup(x => x.GetTxtBxWarning()).Returns(_txtbxWarning);
             _form.Setup(x => x.GetLogic()).Returns(_logic);
+            _form.Setup(x => x.GetImagesPath()).Returns(@"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\test-lib\");
 
             _graphics = new Graphics(_form.Object);
         }
@@ -107,7 +113,7 @@ namespace BestefarsBilder.Test
             _graphics.FormStyleEdit();
             Assert.IsTrue(_form.Object.GetLogic().IsEditReg);
             Assert.IsFalse(_form.Object.GetLogic().IsReadReg);
-            Assert.IsTrue(_form.Object.GetLogic().IsNewReg);
+            Assert.IsFalse(_form.Object.GetLogic().IsNewReg);
 
             Assert.AreEqual(_activeLinkColor, _lnkEdit.BackColor);
             Assert.AreEqual(_backgroundColor, _lnkRead.BackColor);
@@ -115,14 +121,10 @@ namespace BestefarsBilder.Test
 
             Assert.AreEqual("Rediger oppføring", _groupBox.Text);
 
+            Assert.AreEqual(false, _txtbxId.ReadOnly);
+
             foreach (TextBox tbx in _txtBoxes)
             {
-                if (tbx.Name == "txtbxId")
-                {
-                    Assert.AreEqual(_activeColor, tbx.BackColor);
-                    Assert.AreEqual(false, tbx.ReadOnly);
-                    continue;
-                }
                 Assert.AreEqual(_inactiveColor, tbx.BackColor);
                 Assert.AreEqual(true, tbx.ReadOnly);
             }
@@ -149,12 +151,6 @@ namespace BestefarsBilder.Test
             Assert.AreEqual("Registrer nytt bilde", _groupBox.Text);
             foreach(TextBox bx in _txtBoxes)
             {
-                if (bx.Name == "txtbxId")
-                {
-                    Assert.AreEqual(_inactiveColor, bx.BackColor);
-                    Assert.AreEqual("2", bx.Text);
-                    continue;
-                }
                 Assert.AreEqual(_activeColor, bx.BackColor);
                 Assert.AreEqual("", bx.Text);
             }
@@ -168,6 +164,8 @@ namespace BestefarsBilder.Test
             Assert.AreEqual(true, _btnSave.Enabled);
         }
 
+        
+
         [TestMethod]
         public void FormStyleRead()
         {
@@ -180,14 +178,11 @@ namespace BestefarsBilder.Test
             Assert.AreEqual(_backgroundColor, _lnkEdit.BackColor);
             Assert.AreEqual(_backgroundColor, _lnkAdd.BackColor);
             Assert.AreEqual("Se oppføring", _groupBox.Text);
+
+            Assert.AreEqual(false, _txtbxId.ReadOnly);
+            Assert.AreEqual(1, _txtbxId.Increment);
             foreach (TextBox tbx in _txtBoxes)
             {
-                if (tbx.Name == "txtbxId")
-                {
-                    Assert.AreEqual(_activeColor, tbx.BackColor);
-                    Assert.AreEqual(false, tbx.ReadOnly);
-                    continue;
-                }
                 Assert.AreEqual(_inactiveColor, tbx.BackColor);
                 Assert.AreEqual(true, tbx.ReadOnly);
             }
@@ -205,14 +200,50 @@ namespace BestefarsBilder.Test
         {
             int id = 1;
             _graphics.FillFields(id);
-
+            
             Assert.AreEqual("1", _txtbxId.Text);
             Assert.AreEqual("Title1", _txtbxTitle.Text);
             Assert.AreEqual("1993", _txtbxYear.Text);
             Assert.AreEqual("30x50", _cmbxDimensions.Text);
             Assert.AreEqual("Exhibition1", _cmbxExhibition.Text);
             Assert.AreEqual("Collage", _cmbxArtForm.Text);
+            Assert.IsTrue(_pictureBox.Image != null);
+        }
 
+        [TestMethod]
+        public void ClearFields()
+        {
+            _graphics.ClearFields();
+
+            foreach (TextBox tbx in _txtBoxes)
+            {
+                Assert.AreEqual("", tbx.Text);
+            }
+            foreach (ComboBox cbx in _comboBoxes)
+            {
+                Assert.AreEqual("", cbx.Text);
+            }
+            Assert.AreEqual("", _txtbxWarning.Text);
+            Assert.AreEqual(null, _pictureBox.Image);
+        }
+
+
+        [TestMethod]
+        public void FillFields_BadId()
+        {
+            int id = 0;
+            _graphics.FillFields(id);
+
+            foreach (TextBox tbx in _txtBoxes)
+            {
+                Assert.AreEqual("", tbx.Text);
+            }
+            foreach (ComboBox cbx in _comboBoxes)
+            {
+                Assert.AreEqual("", cbx.Text);
+            }
+            Assert.AreEqual("", _txtbxWarning.Text);
+            
         }
     }
 }

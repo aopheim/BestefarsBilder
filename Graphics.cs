@@ -24,6 +24,7 @@ namespace BestefarsBilder
         private List<ComboBox> _comboBoxes;
         private IArtForm _form;
         private LinkLabel _lnkAdd, _lnkRead, _lnkEdit;
+        private PictureBox _pictureBox;
 
         // private Logic _logic;
 
@@ -35,6 +36,7 @@ namespace BestefarsBilder
             _txtbxWarning = f.GetTxtBxWarning();
             _btnSave = f.GetButtonSave();
             _comboBoxes = f.GetComboBoxes();
+            _pictureBox = f.GetPictureBox();
             _lnkAdd = f.GetLinkLabels().Find(x => x.Name == "lnkRegister");
             _lnkRead = f.GetLinkLabels().Find(x => x.Name == "lnkRead");
             _lnkEdit = f.GetLinkLabels().Find(x => x.Name == "lnkEdit");
@@ -48,7 +50,7 @@ namespace BestefarsBilder
         }
 
 
-        public void ClearText()
+        public void ClearFields()
         {
             foreach(TextBox tbx in _txtBoxes)
             {
@@ -58,6 +60,8 @@ namespace BestefarsBilder
             {
                 cbx.Text = "";
             }
+            SetTxtBxWarning("");
+            _pictureBox.Image = null;
         }
         
         public void DisableFields()
@@ -77,6 +81,7 @@ namespace BestefarsBilder
         public void DisableTextBox(NumericUpDown t)
         {
             t.ReadOnly = true;
+            t.Increment = 0;
         }
 
         public void EnableTextBox(TextBox txtbx)
@@ -124,9 +129,8 @@ namespace BestefarsBilder
             _lnkEdit.BackColor = _backgroundColor;
 
             SetGroupBoxText("Registrer nytt bilde");
-            ClearText();
+            ClearFields();
             EnableFields();     
-            _txtbxId.Text = _form.GetLogic().GetUniqueId().ToString();
             DisableTextBox(_txtbxId);       // Disabling the id text box
             foreach(TextBox bx in _txtBoxes)
             {
@@ -151,14 +155,10 @@ namespace BestefarsBilder
             _lnkAdd.BackColor = _backgroundColor;
             _lnkEdit.BackColor = _backgroundColor;
             _groupBox.Text = "Se oppføring";
+            _txtbxId.ReadOnly = false;
+            _txtbxId.Increment = 1;
             foreach(TextBox tbx in _txtBoxes)
             {
-                if (tbx.Name == "txtbxId")
-                {
-                    tbx.BackColor = _activeColor;
-                    tbx.ReadOnly = false;
-                    continue;
-                }
                 tbx.BackColor = _inactiveColor;
                 tbx.ReadOnly = true;
             }
@@ -168,6 +168,8 @@ namespace BestefarsBilder
                 cbx.Enabled = false;
             }
             _btnSave.Enabled = false;
+            
+
         }
 
 
@@ -198,13 +200,19 @@ namespace BestefarsBilder
         /// <param name="id">Id of the Art object to fill fields with</param>
         public void FillFields(int id)
         {
-            Art a = _form.GetLogic().GetArtPostById(id);
-
-            if (a == null)
+            Art a;
+            try
+            {
+                a = _form.GetLogic().GetArtPostById(id);
+            }
+            catch(ArgumentException e)
             {
                 SetTxtBxWarning("Ingen oppføring med id " + id.ToString() + " funnet");
+                ClearFields();
                 return;
             }
+            
+            _form.GetTxtBxId().Value = a.id;
 
             _txtBoxes.Find(x => x.Name == "txtbxTitle").Text = a.title;
             _txtBoxes.Find(x => x.Name == "txtbxYear").Text = a.year;
@@ -212,7 +220,38 @@ namespace BestefarsBilder
 
             _comboBoxes.Find(x => x.Name == "cmbxArtForm").Text = a.artform;
             _comboBoxes.Find(x => x.Name == "cmbxExhibition").Text = a.exhibition;
-            _comboBoxes.Find(x => x.Name == "cmbxDimensions").Text = a.dimensions;   
+            _comboBoxes.Find(x => x.Name == "cmbxDimensions").Text = a.dimensions;
+
+            if (a.numImageFiles > 0)
+            {
+                try
+                {
+                _pictureBox.Image = Image.FromFile(_form.GetImagesPath() + a.id.ToString() + "_" + "1" + ".jpg");
+                } catch( Exception e)
+                {
+                    _pictureBox.Image = _pictureBox.InitialImage;
+                }
+            }
+
+        }
+
+
+        public void ShowWarningBox(Art a)
+        {
+            DialogResult result = MessageBox.Show(
+                "Vil du lagre katalognummer" + a.id.ToString() + " uten bildefiler?",
+                "Lagre oppføring uten bilder?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+                );
+            if (result == DialogResult.Yes)
+            {
+                return;
+            }
+            else
+            {
+                this.FillFields(a.id);
+            }
         }
 
         public void SetTxtBxWarning(string s)

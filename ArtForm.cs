@@ -16,12 +16,14 @@ namespace BestefarsBilder
     public partial class ArtForm : Form, IArtForm
     {
         private Color _inactiveColor, _activeColor, _warningColor;
-        private string _jsonPath = "";
+        private string _jsonPath, _imagesPath;
+        private List<String> _origImagePaths = new List<string>();
         private List<TextBox> _txtBoxes;
         private List<ComboBox> _comboBoxes;
 
         private Graphics _graphics;
         private Logic _logic;
+
 
 
 
@@ -31,14 +33,16 @@ namespace BestefarsBilder
             InitializeComponent();
             _txtBoxes = new List<TextBox>()
             {
-                txtbxTitle, txtbxYear, txtbxComment
+                txtbxTitle, txtbxYear, txtbxComment, txtbxImages
             };
             _comboBoxes = new List<ComboBox>
             {
                 cmbxArtForm, cmbxExhibition, cmbxDimensions
             };
             _jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\lib\kunst.json";
+            _imagesPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\";
             txtbxJsonPath.Text = _jsonPath;
+            txtbxImagesFolder.Text = _imagesPath;
             _logic = new Logic(new Storage(_jsonPath), this);
             _graphics = new Graphics(this);
 
@@ -66,6 +70,11 @@ namespace BestefarsBilder
         public Graphics GetGraphics()
         {
             return _graphics;
+        }
+
+        public PictureBox GetPictureBox()
+        {
+            return this.pictureBox;
         }
 
         public GroupBox GetGroupBox()
@@ -151,6 +160,7 @@ namespace BestefarsBilder
             _logic.IsReadReg = false;
             _logic.IsEditReg = false;
             _graphics.FormStyleAdd();        // Styling the form to registering mode
+            GetTxtBxId().Text = GetLogic().GetUniqueId().ToString();
         }
 
 
@@ -167,6 +177,9 @@ namespace BestefarsBilder
         private void lnkEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             _graphics.FormStyleEdit();
+
+            txtbxId.KeyUp += TxtbxID_KeyUp;     // Binding event. 
+            txtbxId.KeyDown += TxtbxID_KeyDown;
         }
 
 
@@ -185,6 +198,16 @@ namespace BestefarsBilder
         }
         
 
+        public List<String> GetOrigImagePaths()
+        {
+            return this._origImagePaths;
+        }
+
+        public string GetImagesPath()
+        {
+            return _imagesPath;
+        }
+
         // Turning of the sound when pressing enter
         private void TxtbxID_KeyDown(object sender, KeyEventArgs e)
         {
@@ -200,6 +223,7 @@ namespace BestefarsBilder
         {
             if (e.KeyCode == Keys.Enter)
             {
+                _graphics.ClearFields();
                 if (_logic.IsEditReg)
                 {
                     _graphics.FormStyleAdd();
@@ -221,11 +245,64 @@ namespace BestefarsBilder
 
         }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _origImagePaths.Clear();     // Removes all earlier instances.
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = @"C:\Users\adrian\Documents\Adrian\Hornsgate\origImageLib\",
+                Title = "Velg bilder",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                Filter = "jpg files (*.jpg)|*.jpg|All files|*.*",
+                Multiselect = true,
+                FilterIndex = 1,
+                RestoreDirectory = true,
+
+            };
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                foreach(string s in openFileDialog1.SafeFileNames)  // File names to be visualized
+                {
+                    string newS = _logic.RemoveSpaces(s);
+                    txtbxImages.Text +=  newS + " ";
+                }
+
+                foreach(string s in openFileDialog1.FileNames)
+                {
+                    _origImagePaths.Add(s);
+                }
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FolderBrowserDialog browserDialog = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true,
+                Description = "Velg mappe der bildefilene er lagret",
+            };
+
+            if (browserDialog.ShowDialog() == DialogResult.OK)
+            {
+                txtbxImagesFolder.Text = browserDialog.SelectedPath;
+                txtbxImagesFolder.ReadOnly = true;
+                txtbxImagesFolder.BackColor = _inactiveColor;
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
-                InitialDirectory = @"D:\",
+                InitialDirectory = @"C:\",
                 Title = "Velg biblioteksfil",
 
                 CheckFileExists = true,

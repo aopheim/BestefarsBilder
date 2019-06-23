@@ -16,8 +16,10 @@ namespace BestefarsBilder.Test
         private Graphics _graphics;
         private Logic _logic;
         private List<Art> _arts;
-        private TextBox _txtbxId, _txtbxTitle, _txtbxYear, _txtbxComment, _txtbxWarning;
+        private TextBox _txtbxTitle, _txtbxYear, _txtbxComment, _txtbxWarning, _txtbxImages;
         private ComboBox _cmbxArtForm, _cmbxExhibition, _cmbxDimensions;
+        private PictureBox _pictureBox;
+        private NumericUpDown _txtbxId;
         private GroupBox _groupBox;
 
         private List<LinkLabel> _linkLabels;
@@ -35,18 +37,20 @@ namespace BestefarsBilder.Test
                 new Art(){ id = 2},
                 new Art(){ id = 3}
             };
-            _txtbxId = new TextBox() { Text = "4", Name = "txtbxId"};
+            _txtbxId = new NumericUpDown() { Name = "txtbxId", Value = 4};
             _txtbxTitle = new TextBox() { Text = "Title", Name="txtbxTitle"};
             _txtbxYear = new TextBox() { Text = "1993", Name = "txtbxYear" };
             _txtbxComment = new TextBox() { Text = "Comment", Name = "txtbxComment" };
             _txtbxWarning = new TextBox();
+            _txtbxImages = new TextBox() { Name = "txtbxImages" };
             _cmbxArtForm = new ComboBox() { Text = "Collage", Name = "cmbxArtForm" };
             _cmbxExhibition = new ComboBox() { Text = "Utstilling 1", Name = "cmbxExhibition"};
             _cmbxDimensions = new ComboBox() { Text = "30x50", Name = "cmbxDimensions" };
             _groupBox = new GroupBox();
-            _txtBoxes = new List<TextBox> { _txtbxId, _txtbxTitle, _txtbxYear, _txtbxComment };
+            _txtBoxes = new List<TextBox> { _txtbxTitle, _txtbxYear, _txtbxComment, _txtbxImages };
             _comboBoxes = new List<ComboBox> { _cmbxArtForm, _cmbxExhibition, _cmbxDimensions };
             _linkLabels = new List<LinkLabel> { new LinkLabel(), new LinkLabel() };
+            _pictureBox = new PictureBox();
             _btnSave = new Button();
 
             _storage.Setup(x => x.GetFromStorage()).Returns(_arts);
@@ -59,6 +63,7 @@ namespace BestefarsBilder.Test
             _form.Setup(x => x.GetTxtBxWarning()).Returns(_txtbxWarning);
             _form.Setup(x => x.GetButtonSave()).Returns(_btnSave);
             _form.Setup(x => x.GetLinkLabels()).Returns(_linkLabels);
+            _form.Setup(x => x.GetPictureBox()).Returns(_pictureBox);
 
             _graphics = new Graphics(_form.Object);
             _form.Setup(x => x.GetGraphics()).Returns(_graphics);
@@ -78,15 +83,17 @@ namespace BestefarsBilder.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Invalid id")]
         public void GetArtPostById_BadId()
         {
             var a = _logic.GetArtPostById(4);
-            Assert.IsNull(a);
         }
 
         [TestMethod]
         public void GetArtFromForm()
         {
+            _txtbxImages.Text = "DSC1.jpg DSC2.jpg";
+
             Art a = _logic.GetArtFromForm(_form.Object);
             Assert.AreEqual(4, a.id);
             Assert.AreEqual("Title", a.title);
@@ -95,8 +102,64 @@ namespace BestefarsBilder.Test
             Assert.AreEqual("Collage", a.artform);
             Assert.AreEqual("Utstilling 1", a.exhibition);
             Assert.AreEqual("30x50", a.dimensions);
+            Assert.AreEqual(2, a.numImageFiles);
+        }
+        
+
+        [TestMethod]
+        public void SaveImages()
+        {
+            List<String> imgs = new List<string>()
+            {
+                "DSC1.jpg",
+                "DSC2.jpg"
+            };
+
+            throw new NotImplementedException();
         }
 
+
+
+        [TestMethod]
+        public void GetNumImageFiles()
+        {
+            string s = "";
+            int num = _logic.GetNumImageFiles(s);
+            Assert.AreEqual(0, num);
+
+            s = "DSC1.jpg";
+            num = _logic.GetNumImageFiles(s);
+            Assert.AreEqual(1, num);
+
+            s = "DSC1.jpg DSC2.jpg";
+            num = _logic.GetNumImageFiles(s);
+            Assert.AreEqual(2, num);
+
+            s = "DSC1.jpg DSC2.jpg DSC3.jpg";
+            num = _logic.GetNumImageFiles(s);
+            Assert.AreEqual(3, num);
+        }
+
+
+        [TestMethod]
+        public void RemoveSpaces()
+        {
+            string s = "DSC1.jpg";
+            Assert.AreEqual("DSC1.jpg", _logic.RemoveSpaces(s));
+
+            s = "DSC 1.jpg";
+            Assert.AreEqual("DSC1.jpg", _logic.RemoveSpaces(s));
+
+            s = "DSC    1.jpg ";
+            Assert.AreEqual("DSC1.jpg", _logic.RemoveSpaces(s));
+
+            s = "D  S   C   1.jpg ";
+            Assert.AreEqual("DSC1.jpg", _logic.RemoveSpaces(s));
+
+            s = "       DSC                 1.jpg          ";
+            Assert.AreEqual("DSC1.jpg", _logic.RemoveSpaces(s));
+
+        }
 
         [TestMethod]
         public void OnSave_AddArt()
@@ -104,7 +167,7 @@ namespace BestefarsBilder.Test
             _logic.IsNewReg = true;
             _logic.IsEditReg = false;
             _logic.IsReadReg = false;
-            _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Exists(z => z.title == "Title"))));
+            //_storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Exists(z => z.title == "Title"))));
             _storage.Setup(x => x.PutInStorage(It.Is<List<Art>>(y => y.Count() == 4)));
 
             _logic.OnSave();

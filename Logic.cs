@@ -31,9 +31,15 @@ namespace BestefarsBilder
         {
             Art newArt = GetArtFromForm(_form);
 
+            if (newArt.numImageFiles == 0)
+            {
+                _form.GetGraphics().ShowWarningBox(newArt);
+            }
+
             if (IsNewReg) // Registration is to be added to the JSON file
             {
                 AddArt(newArt);
+                SaveImages(_form.GetOrigImagePaths(), newArt);
                 IsNewReg = false;      // Resetting boolean.
             }
 
@@ -46,23 +52,41 @@ namespace BestefarsBilder
                     _form.GetGraphics().SetTxtBxWarning("Redigerer en ugyldig ID");
                     return;
                 }
+                SaveImages(_form.GetOrigImagePaths(), newArt);
                 IsEditReg = false;
             }
             _form.GetGraphics().SetTxtBxWarning("Kunst lagret");
         }
+
+
+        public void SaveImages(List<String> fullPaths, Art a)
+        {
+            int counter = 1;
+            foreach(string oldPath in fullPaths)
+            {
+                string filename = a.id.ToString() + "_" + counter.ToString() + ".jpg";
+                string newPath = _form.GetImagesPath() + filename;
+                //_form.GetPictureBox().Image = _form.GetPictureBox().InitialImage;     // Setting the displayer image to null if the displayed image is to be overwritten
+                System.IO.File.Copy(oldPath, newPath, true);
+                counter += 1;
+            }
+        }
+
+
 
         public Art GetArtFromForm(IArtForm form)
         {
             List<TextBox> txtboxes = form.GetTextBoxes();
             List<ComboBox> comboBoxes = form.GetComboBoxes();
 
-            int id = Int32.Parse(txtboxes.Find(x => x.Name == "txtbxId").Text);
+            int id = (int) _form.GetTxtBxId().Value;
             string title = txtboxes.Find(x => x.Name == "txtbxTitle").Text;
             string artform = comboBoxes.Find(x => x.Name == "cmbxArtForm").Text;
             string exhibition = comboBoxes.Find(x => x.Name == "cmbxExhibition").Text;
             string dimensions = comboBoxes.Find(x => x.Name == "cmbxDimensions").Text;
             string year = txtboxes.Find(x => x.Name == "txtbxYear").Text;       // Saving as string makes it possible to save no year as ""
             string comment = txtboxes.Find(x => x.Name == "txtbxComment").Text;
+            int numImageFiles = GetNumImageFiles(txtboxes.Find(x => x.Name == "txtbxImages").Text);
 
             Art a = new Art
             {
@@ -73,14 +97,34 @@ namespace BestefarsBilder
                 dimensions = dimensions,
                 year = year,
                 comment = comment,
+                numImageFiles = numImageFiles
             };
             return a;
+        }
+
+
+        public string RemoveSpaces(string s)
+        {
+            return new string(s.ToCharArray().Where(c => !Char.IsWhiteSpace(c)).ToArray());
+        }
+
+        public int GetNumImageFiles(string s)
+        {
+            if (s == "")
+            {
+                return 0;
+            }
+            return s.Split(' ').Length;
         }
 
         public Art GetArtPostById(int id)
         {
             var arts = _storage.GetFromStorage();
             var res = arts.FirstOrDefault(x => x.id == id);
+            if (res == null)
+            {
+                throw new ArgumentException();
+            }
             return res;
         }
 
