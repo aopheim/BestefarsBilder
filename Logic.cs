@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BestefarsBilder
@@ -29,17 +27,25 @@ namespace BestefarsBilder
         /// </summary>
         public void OnSave()
         {
-            Art newArt = GetArtFromForm(_form);
+            Art newArt = this.GetArtFromForm(_form);
 
             if (newArt.numImageFiles == 0)
             {
-                _form.GetGraphics().ShowWarningBox(newArt);
+                DialogResult result = _form.GetGraphics().ShowWarningBox(newArt);
+                if (result == DialogResult.No)
+                {
+                    _form.GetGraphics().FillFields(newArt.id);
+                    return;
+                }
             }
 
             if (IsNewReg) // Registration is to be added to the JSON file
             {
                 AddArt(newArt);
                 SaveImages(_form.GetOrigImagePaths(), newArt);
+                System.Drawing.Image img = ExportImageToPrint(newArt);
+                string fileToPrintPath = System.IO.Path.Combine(_form.GetImagesPath(), newArt.id.ToString(), ".png");
+                img.Save(fileToPrintPath, System.Drawing.Imaging.ImageFormat.Png);
                 IsNewReg = false;      // Resetting boolean.
             }
 
@@ -56,20 +62,74 @@ namespace BestefarsBilder
                 IsEditReg = false;
             }
             _form.GetGraphics().SetTxtBxWarning("Kunst lagret");
+            _form.GetGraphics().FillFields(newArt.id);
         }
 
 
         public void SaveImages(List<String> fullPaths, Art a)
         {
             int counter = 1;
-            foreach(string oldPath in fullPaths)
+            foreach(string sourcePath in fullPaths)
             {
                 string filename = a.id.ToString() + "_" + counter.ToString() + ".jpg";
-                string newPath = _form.GetImagesPath() + filename;
-                //_form.GetPictureBox().Image = _form.GetPictureBox().InitialImage;     // Setting the displayer image to null if the displayed image is to be overwritten
-                System.IO.File.Copy(oldPath, newPath, true);
+                string newPath = System.IO.Path.Combine(_form.GetImagesPath(), filename);
+                _form.GetPictureBox().Image = _form.GetPictureBox().InitialImage;     // Setting the displayer image to null if the displayed image is to be overwritten
+                if (System.IO.File.Exists(newPath))
+                {
+                    try
+                    {
+                        System.IO.File.Delete(newPath);             // Deleting the existing file if it is to be overwritten
+                    }
+                    catch(Exception e)
+                    {
+                        
+                    }
+                }
+                try
+                {
+                    System.IO.File.Copy(sourcePath, newPath, true);
+                } catch(Exception e)
+                {
+                    _form.GetGraphics().SetTxtBxWarning(e.ToString());
+                }
                 counter += 1;
             }
+        }
+
+        public System.Drawing.Image ExportImageToPrint(Art a)
+        {
+            //first, create a dummy bitmap just to get a graphics object
+            System.Drawing.Image img = new System.Drawing.Bitmap(1, 1);
+            System.Drawing.Graphics drawing = System.Drawing.Graphics.FromImage(img);
+
+            //measure the string to see how big the image needs to be
+            System.Drawing.SizeF textSize = drawing.MeasureString(a.ToString(), TextBox.DefaultFont);
+
+            //free up the dummy image and old graphics object
+            //img.Dispose();
+            //drawing.Dispose();
+
+            //create a new image of the right size
+            img = new System.Drawing.Bitmap((int)textSize.Width, (int)textSize.Height);
+
+            drawing = System.Drawing.Graphics.FromImage(img);
+
+            //paint the background
+            drawing.Clear(System.Drawing.Color.White);
+
+            //create a brush for the text
+            System.Drawing.Brush textBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+
+            drawing.DrawString(a.ToString(), TextBox.DefaultFont, textBrush, 0, 0);
+
+            drawing.Save();
+
+            textBrush.Dispose();
+            drawing.Dispose();
+
+            return img;
+
+            
         }
 
 
