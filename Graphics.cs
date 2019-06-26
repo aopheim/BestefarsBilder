@@ -132,16 +132,9 @@ namespace BestefarsBilder
             ClearFields();
             EnableFields();     
             DisableTextBox(_txtbxId);       // Disabling the id text box
-            foreach(TextBox bx in _txtBoxes)
-            {
-                if (bx.Name == "txtbxId")
-                {
-                    bx.BackColor = _inactiveColor;
-                    continue;
-                }
-                bx.BackColor = _activeColor;
-            };
+            foreach(TextBox bx in _txtBoxes) { bx.BackColor = _activeColor;  };
             foreach(ComboBox cbx in _comboBoxes) { cbx.BackColor = _activeColor; };
+            //_txtbxId.BackColor = _inactiveColor;
             _btnSave.Enabled = true;  // Enabling save button
         }
 
@@ -236,22 +229,15 @@ namespace BestefarsBilder
         }
 
 
-        public void ShowWarningBox(Art a)
+        public DialogResult ShowWarningBox(Art a)
         {
             DialogResult result = MessageBox.Show(
-                "Vil du lagre katalognummer" + a.id.ToString() + " uten bildefiler?",
+                "Vil du lagre katalognummer " + a.id.ToString() + " uten bildefiler?",
                 "Lagre oppføring uten bilder?",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
                 );
-            if (result == DialogResult.Yes)
-            {
-                return;
-            }
-            else
-            {
-                this.FillFields(a.id);
-            }
+            return result;
         }
 
         public void SetTxtBxWarning(string s)
