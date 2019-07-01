@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+
+
 
 namespace BestefarsBilder
 {
@@ -43,9 +49,7 @@ namespace BestefarsBilder
             {
                 AddArt(newArt);
                 SaveImages(_form.GetOrigImagePaths(), newArt);
-                System.Drawing.Image img = ExportImageToPrint(newArt);
-                string fileToPrintPath = System.IO.Path.Combine(_form.GetImagesPath(), newArt.id.ToString(), ".png");
-                img.Save(fileToPrintPath, System.Drawing.Imaging.ImageFormat.Png);
+                ExportImageToPrint(newArt);
                 IsNewReg = false;      // Resetting boolean.
             }
 
@@ -82,7 +86,7 @@ namespace BestefarsBilder
                     }
                     catch(Exception e)
                     {
-                        
+                        Console.WriteLine(e);
                     }
                 }
                 try
@@ -96,42 +100,84 @@ namespace BestefarsBilder
             }
         }
 
-        public System.Drawing.Image ExportImageToPrint(Art a)
+        /// <summary>
+        /// Resize the image to the specified width and height.
+        /// </summary>
+        /// <param name="image">The image to resize.</param>
+        /// <param name="width">The width to resize to.</param>
+        /// <param name="height">The height to resize to.</param>
+        /// <returns>The resized image.</returns>
+        public static Bitmap ResizeImage(Image image, int width)
         {
-            //first, create a dummy bitmap just to get a graphics object
-            System.Drawing.Image img = new System.Drawing.Bitmap(1, 1);
-            System.Drawing.Graphics drawing = System.Drawing.Graphics.FromImage(img);
-
-            //measure the string to see how big the image needs to be
-            System.Drawing.SizeF textSize = drawing.MeasureString(a.ToString(), TextBox.DefaultFont);
-
-            //free up the dummy image and old graphics object
-            //img.Dispose();
-            //drawing.Dispose();
-
-            //create a new image of the right size
-            img = new System.Drawing.Bitmap((int)textSize.Width, (int)textSize.Height);
-
-            drawing = System.Drawing.Graphics.FromImage(img);
-
-            //paint the background
-            drawing.Clear(System.Drawing.Color.White);
-
-            //create a brush for the text
-            System.Drawing.Brush textBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-
-            drawing.DrawString(a.ToString(), TextBox.DefaultFont, textBrush, 0, 0);
-
-            drawing.Save();
-
-            textBrush.Dispose();
-            drawing.Dispose();
-
-            return img;
-
+            double ratio = (double) width / image.Width;
             
+            int height = (int) (image.Height * ratio);
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = System.Drawing.Graphics.FromImage(destImage))
+            {
+                /*
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                */
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
         }
 
+        public void ExportImageToPrint(Art a)
+        {
+            //Load the Image to be written on.
+            string imgPath = System.IO.Path.Combine(_form.GetImagesPath(), a.id.ToString() + "_1" + ".jpg");
+            Image img = Image.FromFile(imgPath);
+
+            Font arialFont = new Font("Arial", 10);
+            Bitmap bitmap = ResizeImage(img, 300); // Resizing to save disk space
+
+
+            // Determining needed size for the text
+            Bitmap measureBmp = new Bitmap(1, 1);
+            System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(measureBmp);
+            using (var measureGraphics = System.Drawing.Graphics.FromImage(measureBmp))
+            {
+                var stringSize = measureGraphics.MeasureString(a.ToString(), arialFont);
+                graphics = AddWhiteSpaceToImage(bitmap, img, stringSize);
+            }
+
+            PointF location = new PointF(0, bitmap.Height);
+            using (graphics)
+            {   
+                graphics.DrawString(a.ToString(), arialFont, Brushes.Black, location);   
+            }
+            graphics.to
+            imgPath = System.IO.Path.Combine(_form.GetImagesPath(), a.id.ToString() + "_1");
+            bitmap.Save(imgPath + ".bmp", ImageFormat.Bmp );             //save the image file
+        }
+
+
+        public System.Drawing.Graphics AddWhiteSpaceToImage(Bitmap bmpSrc, Image imgSrc, SizeF stringSize)
+        {
+            System.Drawing.Graphics whiteBmp = System.Drawing.Graphics.FromImage(bmpSrc);
+            Size size = stringSize.ToSize();
+            whiteBmp.FillRectangle(Brushes.White, 0, size.Height, bmpSrc.Width, size.Height);
+            
+            return whiteBmp;
+            //whiteImage.DrawImageUnscaled(imgSrc, 0, 0, 240, 320);
+            //whiteImage.DrawImageUnscaled(0)
+            //whiteImage.Save("file.jpg", ImageFormat.Jpeg);
+        }
+    
 
 
         public Art GetArtFromForm(IArtForm form)

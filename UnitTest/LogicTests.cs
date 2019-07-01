@@ -64,6 +64,7 @@ namespace BestefarsBilder.Test
             _form.Setup(x => x.GetButtonSave()).Returns(_btnSave);
             _form.Setup(x => x.GetLinkLabels()).Returns(_linkLabels);
             _form.Setup(x => x.GetPictureBox()).Returns(_pictureBox);
+            _form.Setup(x => x.GetImagesPath()).Returns(@"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\test-lib");
 
             _graphics = new Graphics(_form.Object);
             _form.Setup(x => x.GetGraphics()).Returns(_graphics);
@@ -234,6 +235,14 @@ namespace BestefarsBilder.Test
             int res = _logic.EditArt(editedArt.id, editedArt);
             Assert.AreEqual(res, 0);
         }
+
+
+        [TestMethod]
+        public void ExportImageToPrint()
+        {
+            _logic.ExportImageToPrint(_arts[0]);
+        }
+
 
         [TestMethod]
         public void GetUniqueId()
