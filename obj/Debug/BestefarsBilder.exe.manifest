@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BestefarsBilder.exe" size="32256">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BestefarsBilder.exe" size="34816">
       <assemblyIdentity name="BestefarsBilder" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>9iRadcpZ1h0/dy1vQIrd2lbWf+8pJrqOY4aI+huALWw=</dsig:DigestValue>
+        <dsig:DigestValue>LaCjEtLTFVfWEyfzVx/y/Zp1aIFbKPLkQjTf5cUikQY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -96,6 +96,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>rl5/qDc7Jz+tB+BIbOv9iMGPlRe6YJwrjmU09dnlPcs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="test-lib\1_1.jpg" size="2729290">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>v4UwF0bWM95wRa97tm5BRXR126zMFN7n9bQdd50eWBE=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

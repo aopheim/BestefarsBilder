@@ -113,7 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
-    <Folder Include="test-lib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="test-lib\1_1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

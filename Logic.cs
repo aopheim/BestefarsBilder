@@ -136,16 +136,58 @@ namespace BestefarsBilder
             return destImage;
         }
 
+
+        public System.Drawing.Bitmap WriteTextToImage(Image img, string artString)
+        {
+            string imgPath = System.IO.Path.Combine(_form.GetImagesPath());
+            Font arialFont = new Font("Arial", 10);
+            using (var template = System.Drawing.Graphics.FromImage(img))
+            {
+                var stringSize = template.MeasureString(artString, arialFont).ToSize();
+                Bitmap bitmapWhite = new Bitmap(stringSize.Width, stringSize.Height);
+                using (var g = System.Drawing.Graphics.FromImage(bitmapWhite))
+                {
+                    g.FillRectangle(Brushes.White, 0, 0, 1000, 1000);
+                    PointF location = new PointF(0, 0);
+                    g.DrawString(artString, arialFont, Brushes.Black, location);
+                    return bitmapWhite;
+                }
+            }
+        }
+
         public void ExportImageToPrint(Art a)
         {
-            //Load the Image to be written on.
-            string imgPath = System.IO.Path.Combine(_form.GetImagesPath(), a.id.ToString() + "_1" + ".jpg");
-            Image img = Image.FromFile(imgPath);
+            if (a.numImageFiles >= 1) // If there is saved images to the Art object
+            {
+                string imgPath = System.IO.Path.Combine(_form.GetImagesPath(), a.id.ToString() + "_1" + ".jpg");
 
-            Font arialFont = new Font("Arial", 10);
-            Bitmap bitmap = ResizeImage(img, 300); // Resizing to save disk space
+                using (Image img = Image.FromFile(imgPath)) {
+
+                    Font arialFont = new Font("Arial", 10);
+                    Bitmap bitmapImage = ResizeImage(img, 300); // Resizing to save disk space
+                    Bitmap bitmapText = WriteTextToImage(img, a.ToString());
+                
+                    int height = bitmapImage.Height + bitmapText.Height;
+                    int width = Math.Max(bitmapImage.Width, bitmapText.Width);
+                    Bitmap fullBmp = new Bitmap(width, height);
+                    System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(fullBmp);
+                    gr.DrawImage(bitmapImage, 0, 0, bitmapImage.Width, bitmapImage.Height);
+                    gr.DrawImage(bitmapText, 0, bitmapImage.Height);
+                    fullBmp.Save(_form.GetImagesPath() + a.id.ToString() + ".bmp", ImageFormat.Bmp);
+
+                }
+            } else
+            {
+                Font arialFont = new Font("Arial", 10);
+                Image img =  new Bitmap(500, 500);
+                Bitmap bitmapText = WriteTextToImage(img, a.ToString());
+                bitmapText.Save(_form.GetImagesPath() + a.id.ToString() + ".bmp", ImageFormat.Bmp);
+            }
 
 
+
+
+            /*
             // Determining needed size for the text
             Bitmap measureBmp = new Bitmap(1, 1);
             System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(measureBmp);
@@ -154,15 +196,10 @@ namespace BestefarsBilder
                 var stringSize = measureGraphics.MeasureString(a.ToString(), arialFont);
                 graphics = AddWhiteSpaceToImage(bitmap, img, stringSize);
             }
+            */
 
-            PointF location = new PointF(0, bitmap.Height);
-            using (graphics)
-            {   
-                graphics.DrawString(a.ToString(), arialFont, Brushes.Black, location);   
-            }
-            graphics.to
-            imgPath = System.IO.Path.Combine(_form.GetImagesPath(), a.id.ToString() + "_1");
-            bitmap.Save(imgPath + ".bmp", ImageFormat.Bmp );             //save the image file
+            //imgPath = System.IO.Path.Combine(_form.GetImagesPath(), a.id.ToString() + "_1");
+            //bitmap.Save(imgPath + ".bmp", ImageFormat.Bmp );             //save the image file
         }
 
 

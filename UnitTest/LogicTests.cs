@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,7 +34,7 @@ namespace BestefarsBilder.Test
             _storage = new Mock<IStorage>(MockBehavior.Strict);
             _arts = new List<Art>()
             {
-                new Art(){ id = 1, title = "OriginalTitle" },
+                new Art(){ id = 1, title = "OriginalTitle", numImageFiles = 1 },
                 new Art(){ id = 2},
                 new Art(){ id = 3}
             };
@@ -64,7 +65,7 @@ namespace BestefarsBilder.Test
             _form.Setup(x => x.GetButtonSave()).Returns(_btnSave);
             _form.Setup(x => x.GetLinkLabels()).Returns(_linkLabels);
             _form.Setup(x => x.GetPictureBox()).Returns(_pictureBox);
-            _form.Setup(x => x.GetImagesPath()).Returns(@"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\test-lib");
+            _form.Setup(x => x.GetImagesPath()).Returns(@"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\test-lib\");
 
             _graphics = new Graphics(_form.Object);
             _form.Setup(x => x.GetGraphics()).Returns(_graphics);
@@ -237,10 +238,25 @@ namespace BestefarsBilder.Test
         }
 
 
+
+        [TestMethod]
+        public void WriteTextToImage()
+        {
+            string imgPath = System.IO.Path.Combine(_form.Object.GetImagesPath(), "1_1" + ".jpg");
+
+            string testString = "test test etst etest test \ntest etst\n etest test test etst etest test test etst etest test test etst etest test test etst etest ";
+            using (Image img = Image.FromFile(imgPath))
+            {
+                _logic.WriteTextToImage(img, _arts[0].ToString());
+            }
+        }
+
+
         [TestMethod]
         public void ExportImageToPrint()
         {
             _logic.ExportImageToPrint(_arts[0]);
+            _logic.ExportImageToPrint(_arts[1]);
         }
 
 

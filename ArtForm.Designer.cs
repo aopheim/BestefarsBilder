@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSelectImages = new System.Windows.Forms.Button();
+            this.txtbxImages = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtbxId = new System.Windows.Forms.NumericUpDown();
             this.txtbxComment = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtbxYear = new System.Windows.Forms.TextBox();
+            this.txtbxConsole = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
             this.cmbxDimensions = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbxExhibition = new System.Windows.Forms.ComboBox();
@@ -42,25 +48,19 @@
             this.txtbxTitle = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.txtbxConsole = new System.Windows.Forms.TextBox();
             this.lnkRegister = new System.Windows.Forms.LinkLabel();
             this.lnkEdit = new System.Windows.Forms.LinkLabel();
             this.lnkRead = new System.Windows.Forms.LinkLabel();
             this.txtbxJsonPath = new System.Windows.Forms.TextBox();
             this.btnBrowseArtFile = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtbxId = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.txtbxImagesFolder = new System.Windows.Forms.TextBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.txtbxImages = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnSelectImages = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtbxId)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -93,6 +93,49 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // btnSelectImages
+            // 
+            this.btnSelectImages.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelectImages.Location = new System.Drawing.Point(401, 437);
+            this.btnSelectImages.Name = "btnSelectImages";
+            this.btnSelectImages.Size = new System.Drawing.Size(123, 26);
+            this.btnSelectImages.TabIndex = 17;
+            this.btnSelectImages.Text = "Bla gjennom...";
+            this.btnSelectImages.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSelectImages.UseVisualStyleBackColor = true;
+            this.btnSelectImages.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // txtbxImages
+            // 
+            this.txtbxImages.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtbxImages.Location = new System.Drawing.Point(171, 437);
+            this.txtbxImages.Name = "txtbxImages";
+            this.txtbxImages.Size = new System.Drawing.Size(208, 26);
+            this.txtbxImages.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(19, 443);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 20);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Bildefiler";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // txtbxId
+            // 
+            this.txtbxId.Location = new System.Drawing.Point(171, 31);
+            this.txtbxId.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.txtbxId.Name = "txtbxId";
+            this.txtbxId.Size = new System.Drawing.Size(208, 26);
+            this.txtbxId.TabIndex = 14;
+            this.txtbxId.ValueChanged += new System.EventHandler(this.txtbxId_ValueChanged);
+            // 
             // txtbxComment
             // 
             this.txtbxComment.BackColor = System.Drawing.SystemColors.InactiveCaption;
@@ -120,6 +163,21 @@
             this.txtbxYear.Size = new System.Drawing.Size(208, 26);
             this.txtbxYear.TabIndex = 11;
             // 
+            // txtbxConsole
+            // 
+            this.txtbxConsole.BackColor = System.Drawing.SystemColors.Control;
+            this.txtbxConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtbxConsole.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtbxConsole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxConsole.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtbxConsole.Location = new System.Drawing.Point(171, 483);
+            this.txtbxConsole.Multiline = true;
+            this.txtbxConsole.Name = "txtbxConsole";
+            this.txtbxConsole.ReadOnly = true;
+            this.txtbxConsole.Size = new System.Drawing.Size(208, 32);
+            this.txtbxConsole.TabIndex = 3;
+            this.txtbxConsole.TabStop = false;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -128,6 +186,16 @@
             this.label3.Size = new System.Drawing.Size(53, 20);
             this.label3.TabIndex = 10;
             this.label3.Text = "Årstall";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(433, 477);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(91, 32);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Lagre";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // cmbxDimensions
             // 
@@ -232,31 +300,6 @@
             this.lblID.Text = "Katalognummer";
             this.lblID.Click += new System.EventHandler(this.label2_Click);
             // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(433, 477);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(91, 32);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Lagre";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // txtbxConsole
-            // 
-            this.txtbxConsole.BackColor = System.Drawing.SystemColors.Control;
-            this.txtbxConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtbxConsole.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtbxConsole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxConsole.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtbxConsole.Location = new System.Drawing.Point(171, 483);
-            this.txtbxConsole.Multiline = true;
-            this.txtbxConsole.Name = "txtbxConsole";
-            this.txtbxConsole.ReadOnly = true;
-            this.txtbxConsole.Size = new System.Drawing.Size(208, 32);
-            this.txtbxConsole.TabIndex = 3;
-            this.txtbxConsole.TabStop = false;
-            // 
             // lnkRegister
             // 
             this.lnkRegister.AutoSize = true;
@@ -321,18 +364,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Angi biblioteksfil";
             // 
-            // txtbxId
-            // 
-            this.txtbxId.Location = new System.Drawing.Point(171, 31);
-            this.txtbxId.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.txtbxId.Name = "txtbxId";
-            this.txtbxId.Size = new System.Drawing.Size(208, 26);
-            this.txtbxId.TabIndex = 14;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button1);
@@ -374,36 +405,6 @@
             this.pictureBox.TabIndex = 18;
             this.pictureBox.TabStop = false;
             // 
-            // txtbxImages
-            // 
-            this.txtbxImages.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtbxImages.Location = new System.Drawing.Point(171, 437);
-            this.txtbxImages.Name = "txtbxImages";
-            this.txtbxImages.Size = new System.Drawing.Size(208, 26);
-            this.txtbxImages.TabIndex = 16;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 443);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 20);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Bildefiler";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // btnSelectImages
-            // 
-            this.btnSelectImages.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectImages.Location = new System.Drawing.Point(401, 437);
-            this.btnSelectImages.Name = "btnSelectImages";
-            this.btnSelectImages.Size = new System.Drawing.Size(123, 26);
-            this.btnSelectImages.TabIndex = 17;
-            this.btnSelectImages.Text = "Bla gjennom...";
-            this.btnSelectImages.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSelectImages.UseVisualStyleBackColor = true;
-            this.btnSelectImages.Click += new System.EventHandler(this.button2_Click);
-            // 
             // ArtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -424,9 +425,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtbxId)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtbxId)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();

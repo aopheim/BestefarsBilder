@@ -16,5 +16,19 @@ namespace BestefarsBilder
         public string year { get; set; }
         public string comment { get; set; }
         public int numImageFiles { get; set; }
+
+
+
+        public override string ToString() {
+            return "" +
+                "Katalognr.: " + id.ToString() + "\n" +
+                "Tittel: " + title + "\n" +
+                "Kunstform: " + artform + "\n" +
+                "Utstilling: " + exhibition + "\n" +
+                "Dimensjoner: " + dimensions + "\n" +
+                "År: " + year + "\n" +
+                "Kommentar: " + comment + "\n";
+        }
+
     }
 }
