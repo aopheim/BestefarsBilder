@@ -33,11 +33,11 @@ namespace BestefarsBilder
             InitializeComponent();
             _txtBoxes = new List<TextBox>()
             {
-                txtbxTitle, txtbxYear, txtbxComment, txtbxImages
+                txtbxTitle, txtbxYear, txtbxComment, txtbxImages, txtbxTags
             };
             _comboBoxes = new List<ComboBox>
             {
-                cmbxArtForm, cmbxExhibition, cmbxDimensions
+                cmbxArtForm, cmbxExhibition, cmbxDimensions, cmbxPlacement
             };
             _jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\lib\kunst.json";
             _imagesPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\";
