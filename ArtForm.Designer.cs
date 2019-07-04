@@ -58,6 +58,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.txtbxImagesFolder = new System.Windows.Forms.TextBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtbxTags = new System.Windows.Forms.TextBox();
+            this.cmbxPlacement = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtbxId)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -67,10 +72,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.cmbxPlacement);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnSelectImages);
             this.groupBox1.Controls.Add(this.txtbxImages);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtbxId);
+            this.groupBox1.Controls.Add(this.txtbxTags);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtbxComment);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtbxYear);
@@ -88,7 +98,7 @@
             this.groupBox1.Controls.Add(this.lblID);
             this.groupBox1.Location = new System.Drawing.Point(33, 215);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(530, 515);
+            this.groupBox1.Size = new System.Drawing.Size(530, 570);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
@@ -96,7 +106,7 @@
             // btnSelectImages
             // 
             this.btnSelectImages.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectImages.Location = new System.Drawing.Point(401, 437);
+            this.btnSelectImages.Location = new System.Drawing.Point(401, 469);
             this.btnSelectImages.Name = "btnSelectImages";
             this.btnSelectImages.Size = new System.Drawing.Size(123, 26);
             this.btnSelectImages.TabIndex = 17;
@@ -108,7 +118,7 @@
             // txtbxImages
             // 
             this.txtbxImages.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtbxImages.Location = new System.Drawing.Point(171, 437);
+            this.txtbxImages.Location = new System.Drawing.Point(171, 469);
             this.txtbxImages.Name = "txtbxImages";
             this.txtbxImages.Size = new System.Drawing.Size(208, 26);
             this.txtbxImages.TabIndex = 16;
@@ -116,7 +126,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 443);
+            this.label5.Location = new System.Drawing.Point(19, 475);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 20);
             this.label5.TabIndex = 15;
@@ -139,17 +149,17 @@
             // txtbxComment
             // 
             this.txtbxComment.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtbxComment.Location = new System.Drawing.Point(171, 318);
+            this.txtbxComment.Location = new System.Drawing.Point(171, 268);
             this.txtbxComment.Multiline = true;
             this.txtbxComment.Name = "txtbxComment";
-            this.txtbxComment.Size = new System.Drawing.Size(208, 100);
-            this.txtbxComment.TabIndex = 13;
+            this.txtbxComment.Size = new System.Drawing.Size(208, 84);
+            this.txtbxComment.TabIndex = 12;
             this.txtbxComment.TextChanged += new System.EventHandler(this.txtbxComment_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 321);
+            this.label4.Location = new System.Drawing.Point(19, 271);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 20);
             this.label4.TabIndex = 12;
@@ -158,7 +168,7 @@
             // txtbxYear
             // 
             this.txtbxYear.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtbxYear.Location = new System.Drawing.Point(171, 271);
+            this.txtbxYear.Location = new System.Drawing.Point(171, 227);
             this.txtbxYear.Name = "txtbxYear";
             this.txtbxYear.Size = new System.Drawing.Size(208, 26);
             this.txtbxYear.TabIndex = 11;
@@ -170,7 +180,7 @@
             this.txtbxConsole.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtbxConsole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbxConsole.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtbxConsole.Location = new System.Drawing.Point(171, 483);
+            this.txtbxConsole.Location = new System.Drawing.Point(171, 617);
             this.txtbxConsole.Multiline = true;
             this.txtbxConsole.Name = "txtbxConsole";
             this.txtbxConsole.ReadOnly = true;
@@ -181,7 +191,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 268);
+            this.label3.Location = new System.Drawing.Point(19, 224);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 20);
             this.label3.TabIndex = 10;
@@ -189,10 +199,10 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(433, 477);
+            this.btnSave.Location = new System.Drawing.Point(433, 504);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(91, 32);
-            this.btnSave.TabIndex = 2;
+            this.btnSave.TabIndex = 18;
             this.btnSave.Text = "Lagre";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -206,7 +216,7 @@
             this.cmbxDimensions.Items.AddRange(new object[] {
             "30x30",
             "50x50"});
-            this.cmbxDimensions.Location = new System.Drawing.Point(171, 222);
+            this.cmbxDimensions.Location = new System.Drawing.Point(171, 184);
             this.cmbxDimensions.Name = "cmbxDimensions";
             this.cmbxDimensions.Size = new System.Drawing.Size(208, 28);
             this.cmbxDimensions.TabIndex = 9;
@@ -214,7 +224,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 225);
+            this.label2.Location = new System.Drawing.Point(19, 187);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 20);
             this.label2.TabIndex = 8;
@@ -229,7 +239,7 @@
             this.cmbxExhibition.Items.AddRange(new object[] {
             "Utstilling 1",
             "Utstilling 2"});
-            this.cmbxExhibition.Location = new System.Drawing.Point(171, 173);
+            this.cmbxExhibition.Location = new System.Drawing.Point(171, 142);
             this.cmbxExhibition.Name = "cmbxExhibition";
             this.cmbxExhibition.Size = new System.Drawing.Size(208, 28);
             this.cmbxExhibition.TabIndex = 7;
@@ -238,7 +248,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 171);
+            this.label1.Location = new System.Drawing.Point(19, 140);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 20);
             this.label1.TabIndex = 6;
@@ -256,7 +266,7 @@
             "Skulptur",
             "Håndtegning",
             "Portrett"});
-            this.cmbxArtForm.Location = new System.Drawing.Point(171, 124);
+            this.cmbxArtForm.Location = new System.Drawing.Point(171, 100);
             this.cmbxArtForm.Name = "cmbxArtForm";
             this.cmbxArtForm.Size = new System.Drawing.Size(208, 28);
             this.cmbxArtForm.TabIndex = 5;
@@ -265,7 +275,7 @@
             // lblForm
             // 
             this.lblForm.AutoSize = true;
-            this.lblForm.Location = new System.Drawing.Point(19, 118);
+            this.lblForm.Location = new System.Drawing.Point(19, 94);
             this.lblForm.Name = "lblForm";
             this.lblForm.Size = new System.Drawing.Size(82, 20);
             this.lblForm.TabIndex = 4;
@@ -274,7 +284,7 @@
             // txtbxTitle
             // 
             this.txtbxTitle.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtbxTitle.Location = new System.Drawing.Point(171, 77);
+            this.txtbxTitle.Location = new System.Drawing.Point(171, 63);
             this.txtbxTitle.Name = "txtbxTitle";
             this.txtbxTitle.Size = new System.Drawing.Size(208, 26);
             this.txtbxTitle.TabIndex = 3;
@@ -283,7 +293,7 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(19, 72);
+            this.lblTitle.Location = new System.Drawing.Point(19, 63);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(43, 20);
             this.lblTitle.TabIndex = 1;
@@ -405,12 +415,63 @@
             this.pictureBox.TabIndex = 18;
             this.pictureBox.TabStop = false;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 368);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(82, 20);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Plassering";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(19, 407);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 20);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Tags ";
+            // 
+            // txtbxTags
+            // 
+            this.txtbxTags.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtbxTags.Location = new System.Drawing.Point(171, 404);
+            this.txtbxTags.Multiline = true;
+            this.txtbxTags.Name = "txtbxTags";
+            this.txtbxTags.Size = new System.Drawing.Size(208, 56);
+            this.txtbxTags.TabIndex = 15;
+            this.txtbxTags.TextChanged += new System.EventHandler(this.txtbxComment_TextChanged);
+            // 
+            // cmbxPlacement
+            // 
+            this.cmbxPlacement.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbxPlacement.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbxPlacement.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.cmbxPlacement.FormattingEnabled = true;
+            this.cmbxPlacement.Items.AddRange(new object[] {
+            "30x30",
+            "50x50"});
+            this.cmbxPlacement.Location = new System.Drawing.Point(171, 365);
+            this.cmbxPlacement.Name = "cmbxPlacement";
+            this.cmbxPlacement.Size = new System.Drawing.Size(208, 28);
+            this.cmbxPlacement.TabIndex = 13;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(397, 419);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(121, 20);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "tag1, tag2, tag3";
+            // 
             // ArtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(990, 763);
+            this.ClientSize = new System.Drawing.Size(990, 881);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -467,6 +528,11 @@
         private System.Windows.Forms.TextBox txtbxImages;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnSelectImages;
+        private System.Windows.Forms.ComboBox cmbxPlacement;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtbxTags;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 

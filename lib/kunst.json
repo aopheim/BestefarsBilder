@@ -1,5 +1,6 @@
 [
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 1,
     "title": "nyeee",
     "artform": "Collage",
@@ -7,9 +8,12 @@
     "dimensions": "test",
     "year": "test",
     "comment": "test",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 2,
     "title": "nr2",
     "artform": "Collage",
@@ -17,9 +21,12 @@
     "dimensions": "30x30",
     "year": "1993",
     "comment": "",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 3,
     "title": "nr3",
     "artform": "nej",
@@ -27,9 +34,12 @@
     "dimensions": "30x30",
     "year": "1993",
     "comment": "heaef",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 4,
     "title": "nr4",
     "artform": "hei",
@@ -37,9 +47,12 @@
     "dimensions": "hein",
     "year": "hei",
     "comment": "ie",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 5,
     "title": "nr5",
     "artform": "Collage",
@@ -47,9 +60,12 @@
     "dimensions": "30x30",
     "year": "1995",
     "comment": "Comment5",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 6,
     "title": "nr6Edit",
     "artform": "Collage",
@@ -57,9 +73,12 @@
     "dimensions": "30x30",
     "year": "666",
     "comment": "comment6Edit",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 0
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 7,
     "title": "nr7New",
     "artform": "Collage",
@@ -67,9 +86,12 @@
     "dimensions": "30x30",
     "year": "1992",
     "comment": "comment7",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 0
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 8,
     "title": "nr8",
     "artform": "Collage",
@@ -77,9 +99,12 @@
     "dimensions": "8",
     "year": "1995",
     "comment": "8",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 9,
     "title": "nr9",
     "artform": "9",
@@ -87,9 +112,12 @@
     "dimensions": "9",
     "year": "9",
     "comment": "9",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 0
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 10,
     "title": "nr10",
     "artform": "10",
@@ -97,9 +125,12 @@
     "dimensions": "10",
     "year": "10",
     "comment": "10",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 0
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 11,
     "title": "nr11",
     "artform": "Collage",
@@ -107,9 +138,12 @@
     "dimensions": "30x30",
     "year": "1856",
     "comment": "efe",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 12,
     "title": "12",
     "artform": "12",
@@ -117,9 +151,12 @@
     "dimensions": "1",
     "year": "12",
     "comment": "12",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 13,
     "title": "13",
     "artform": "heiade",
@@ -127,9 +164,12 @@
     "dimensions": "",
     "year": "qe",
     "comment": "ae",
+    "tags": null,
+    "placement": null,
     "numImageFiles": 2
   },
   {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
     "id": 14,
     "title": "14",
     "artform": "",
@@ -137,6 +177,164 @@
     "dimensions": "",
     "year": "",
     "comment": "",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
+    "id": 15,
+    "title": "Tittel15",
+    "artform": "Collage",
+    "exhibition": "Utstilling 1",
+    "dimensions": "30x30",
+    "year": "1994",
+    "comment": "Vi prøver med større font",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 4
+  },
+  {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
+    "id": 16,
+    "title": "Tittel16",
+    "artform": "Skulptur",
+    "exhibition": "Utstilling 1",
+    "dimensions": "30x30",
+    "year": "1992",
+    "comment": "",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
+    "id": 17,
+    "title": "",
+    "artform": "Collage",
+    "exhibition": "",
+    "dimensions": "30x30",
+    "year": "1992",
+    "comment": "",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
+    "id": 18,
+    "title": "Tittel18",
+    "artform": "Collage",
+    "exhibition": "Utstilling 1",
+    "dimensions": "30x30",
+    "year": "1993",
+    "comment": "Massse kommentarer ",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
+    "id": 19,
+    "title": "Tittel19",
+    "artform": "test",
+    "exhibition": "test",
+    "dimensions": "test",
+    "year": "tesgr",
+    "comment": "wninwnnne",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:25:15.0292416+02:00",
+    "id": 20,
+    "title": "20",
+    "artform": "test",
+    "exhibition": "test",
+    "dimensions": "teafreim",
+    "year": "ciwdm",
+    "comment": "ceidiu",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:29:03.04935+02:00",
+    "id": 21,
+    "title": "21",
+    "artform": "hei",
+    "exhibition": "test",
+    "dimensions": "30x30",
+    "year": "19124",
+    "comment": "urenfr",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:34:02.5396602+02:00",
+    "id": 22,
+    "title": "test",
+    "artform": "test",
+    "exhibition": "etes",
+    "dimensions": "egss",
+    "year": "egs",
+    "comment": "",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 0
+  },
+  {
+    "lastEdit": "2019-07-04T23:38:34.0342749+02:00",
+    "id": 23,
+    "title": "23",
+    "artform": "fir",
+    "exhibition": "",
+    "dimensions": "",
+    "year": "",
+    "comment": "",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:41:27.5687417+02:00",
+    "id": 24,
+    "title": "hei",
+    "artform": "",
+    "exhibition": "",
+    "dimensions": "",
+    "year": "",
+    "comment": "",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 2
+  },
+  {
+    "lastEdit": "2019-07-04T23:46:09.7524471+02:00",
+    "id": 25,
+    "title": "",
+    "artform": "",
+    "exhibition": "",
+    "dimensions": "",
+    "year": "",
+    "comment": "",
+    "tags": null,
+    "placement": null,
+    "numImageFiles": 0
+  },
+  {
+    "lastEdit": "2019-07-04T23:56:01.1906731+02:00",
+    "id": 26,
+    "title": "title1",
+    "artform": "",
+    "exhibition": "",
+    "dimensions": "",
+    "year": "",
+    "comment": "",
+    "tags": "tan1, wf, 1ef,e ",
+    "placement": "plass2",
     "numImageFiles": 2
   }
 ]
