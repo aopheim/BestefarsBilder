@@ -63,6 +63,7 @@ namespace BestefarsBilder
                     return;
                 }
                 SaveImages(_form.GetOrigImagePaths(), newArt);
+                ExportImageToPrint(newArt);
                 IsEditReg = false;
             }
             _form.GetGraphics().SetTxtBxWarning("Kunst lagret");
@@ -163,12 +164,13 @@ namespace BestefarsBilder
 
                 using (Image img = Image.FromFile(imgPath)) {
 
-                    Font arialFont = new Font("Arial", 10);
+                    Font arialFont = new Font("Arial", 15);
                     Bitmap bitmapImage = ResizeImage(img, 300); // Resizing to save disk space
                     Bitmap bitmapText = WriteTextToImage(img, a.ToString());
                 
-                    int height = bitmapImage.Height + bitmapText.Height;
-                    int width = Math.Max(bitmapImage.Width, bitmapText.Width);
+                    int height = (int) (bitmapImage.Height + 0.75 * bitmapText.Height);
+                    //int width = Math.Max(bitmapImage.Width, bitmapText.Width);
+                    int width = bitmapImage.Width;
                     Bitmap fullBmp = new Bitmap(width, height);
                     System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(fullBmp);
                     gr.DrawImage(bitmapImage, 0, 0, bitmapImage.Width, bitmapImage.Height);
@@ -228,6 +230,8 @@ namespace BestefarsBilder
             string exhibition = comboBoxes.Find(x => x.Name == "cmbxExhibition").Text;
             string dimensions = comboBoxes.Find(x => x.Name == "cmbxDimensions").Text;
             string year = txtboxes.Find(x => x.Name == "txtbxYear").Text;       // Saving as string makes it possible to save no year as ""
+            string placement = comboBoxes.Find(x => x.Name == "cmbxPlacement").Text;
+            string tags = txtboxes.Find(x => x.Name == "txtbxTags").Text;
             string comment = txtboxes.Find(x => x.Name == "txtbxComment").Text;
             int numImageFiles = GetNumImageFiles(txtboxes.Find(x => x.Name == "txtbxImages").Text);
 
@@ -240,7 +244,10 @@ namespace BestefarsBilder
                 dimensions = dimensions,
                 year = year,
                 comment = comment,
-                numImageFiles = numImageFiles
+                numImageFiles = numImageFiles,
+                lastEdit = DateTime.Now,
+                tags = tags,
+                placement = placement
             };
             return a;
         }
