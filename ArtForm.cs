@@ -37,19 +37,11 @@ namespace BestefarsBilder
             };
             _comboBoxes = new List<ComboBox>
             {
-                cmbxArtForm, cmbxExhibition, cmbxDimensions, cmbxPlacement
+                cmbxArtForm, cmbxExhibition, cmbxDimensions, cmbxRoom, cmbxShelf
             };
-            _jsonPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\lib\kunst.json";
-            _imagesPath = @"C:\Users\adrian\Documents\Adrian\Hornsgate\lib\";
-            txtbxJsonPath.Text = _jsonPath;
-            txtbxImagesFolder.Text = _imagesPath;
-            _logic = new Logic(new Storage(_jsonPath), this);
-            _graphics = new Graphics(this);
+            
 
-            // Defining colors
-            _inactiveColor = _graphics.GetInActiveColor();
-            _activeColor = _graphics.GetActiveColor();
-            _warningColor = _graphics.GetWarningColor();
+            
         }
 
         public List<TextBox> GetTextBoxes()
@@ -236,7 +228,6 @@ namespace BestefarsBilder
                     _graphics.FormStyleRead();
                     _graphics.FillFields(Int32.Parse(txtbxId.Text));
                 }
-
             }
         }
 
@@ -255,13 +246,13 @@ namespace BestefarsBilder
             _origImagePaths.Clear();     // Removes all earlier instances.
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
-                InitialDirectory = @"C:\Users\adrian\Documents\Adrian\Hornsgate\origImageLib\",
+                InitialDirectory = @"C:\Users\adrian\Pictures\Hornsgate - raw",
                 Title = "Velg bilder",
 
                 CheckFileExists = true,
                 CheckPathExists = true,
 
-                Filter = "jpg files (*.jpg)|*.jpg|All files|*.*",
+                Filter = "All files|*.*|jpg files (*.jpg)|*.jpg",
                 Multiselect = true,
                 FilterIndex = 1,
                 RestoreDirectory = true,
@@ -285,6 +276,25 @@ namespace BestefarsBilder
         private void txtbxId_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void artFormBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            _jsonPath = txtbxJsonPath.Text;
+            _imagesPath = txtbxImagesFolder.Text;
+            _logic = new Logic(new Storage(_jsonPath), this);
+            _graphics = new Graphics(this);
+
+            _inactiveColor = _graphics.GetInActiveColor();
+            _activeColor = _graphics.GetActiveColor();
+            _warningColor = _graphics.GetWarningColor();
+
+            btnPersistFilePaths.Enabled = false;
         }
 
         private void button1_Click_1(object sender, EventArgs e)

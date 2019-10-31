@@ -165,7 +165,6 @@ namespace BestefarsBilder
 
         }
 
-
         /// <summary>
         /// Styles the form for editing entries
         /// </summary>
@@ -183,9 +182,6 @@ namespace BestefarsBilder
 
             _groupBox.Text = "Rediger oppføring";
         }
-
-
-
 
         /// <summary>
         /// Fill all text boxes and combo boxes with id
@@ -210,10 +206,13 @@ namespace BestefarsBilder
             _txtBoxes.Find(x => x.Name == "txtbxTitle").Text = a.title;
             _txtBoxes.Find(x => x.Name == "txtbxYear").Text = a.year;
             _txtBoxes.Find(x => x.Name == "txtbxComment").Text = a.comment;
+            _txtBoxes.Find(x => x.Name == "txtbxTags").Text = a.tags;
 
             _comboBoxes.Find(x => x.Name == "cmbxArtForm").Text = a.artform;
             _comboBoxes.Find(x => x.Name == "cmbxExhibition").Text = a.exhibition;
             _comboBoxes.Find(x => x.Name == "cmbxDimensions").Text = a.dimensions;
+            _comboBoxes.Find(x => x.Name == "cmbxRoom").Text = a.room;
+            _comboBoxes.Find(x => x.Name == "cmbxShelf").Text = a.shelf;
 
             if (a.numImageFiles > 0)
             {
@@ -227,7 +226,6 @@ namespace BestefarsBilder
             }
 
         }
-
 
         public DialogResult ShowWarningBox(Art a)
         {

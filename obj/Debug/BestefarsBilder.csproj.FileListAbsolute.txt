@@ -8,7 +8,6 @@ C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.exe
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.pdb
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\bin\Debug\Newtonsoft.Json.dll
-C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\bin\Debug\Newtonsoft.Json.xml
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\obj\Debug\BestefarsBilder.csproj.CopyComplete
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\bin\Debug\BestefarsBilder.exe.manifest

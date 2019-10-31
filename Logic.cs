@@ -73,10 +73,16 @@ namespace BestefarsBilder
 
         public void SaveImages(List<String> fullPaths, Art a)
         {
+            
             int counter = 1;
             foreach(string sourcePath in fullPaths)
             {
-                string filename = a.id.ToString() + "_" + counter.ToString() + ".jpg";
+                string filenameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(sourcePath);
+                string extension = System.IO.Path.GetExtension(sourcePath);
+
+                string filename = a.id.ToString() + "_" + counter.ToString() + extension;
+
+                
                 string newPath = System.IO.Path.Combine(_form.GetImagesPath(), filename);
                 _form.GetPictureBox().Image = _form.GetPictureBox().InitialImage;     // Setting the displayer image to null if the displayed image is to be overwritten
                 if (System.IO.File.Exists(newPath))
@@ -97,6 +103,7 @@ namespace BestefarsBilder
                 {
                     _form.GetGraphics().SetTxtBxWarning(e.ToString());
                 }
+                
                 counter += 1;
             }
         }
@@ -158,7 +165,7 @@ namespace BestefarsBilder
 
         public void ExportImageToPrint(Art a)
         {
-            if (a.numImageFiles >= 1) // If there is saved images to the Art object
+            if (a.numImageFiles < 0) // If there is saved images to the Art object
             {
                 string imgPath = System.IO.Path.Combine(_form.GetImagesPath(), a.id.ToString() + "_1" + ".jpg");
 
@@ -187,21 +194,7 @@ namespace BestefarsBilder
             }
 
 
-
-
-            /*
-            // Determining needed size for the text
-            Bitmap measureBmp = new Bitmap(1, 1);
-            System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(measureBmp);
-            using (var measureGraphics = System.Drawing.Graphics.FromImage(measureBmp))
-            {
-                var stringSize = measureGraphics.MeasureString(a.ToString(), arialFont);
-                graphics = AddWhiteSpaceToImage(bitmap, img, stringSize);
-            }
-            */
-
-            //imgPath = System.IO.Path.Combine(_form.GetImagesPath(), a.id.ToString() + "_1");
-            //bitmap.Save(imgPath + ".bmp", ImageFormat.Bmp );             //save the image file
+            
         }
 
 
@@ -230,7 +223,8 @@ namespace BestefarsBilder
             string exhibition = comboBoxes.Find(x => x.Name == "cmbxExhibition").Text;
             string dimensions = comboBoxes.Find(x => x.Name == "cmbxDimensions").Text;
             string year = txtboxes.Find(x => x.Name == "txtbxYear").Text;       // Saving as string makes it possible to save no year as ""
-            string placement = comboBoxes.Find(x => x.Name == "cmbxPlacement").Text;
+            string room = comboBoxes.Find(x => x.Name == "cmbxRoom").Text;
+            string shelf = comboBoxes.Find(x => x.Name == "cmbxShelf").Text;
             string tags = txtboxes.Find(x => x.Name == "txtbxTags").Text;
             string comment = txtboxes.Find(x => x.Name == "txtbxComment").Text;
             int numImageFiles = GetNumImageFiles(txtboxes.Find(x => x.Name == "txtbxImages").Text);
@@ -247,7 +241,8 @@ namespace BestefarsBilder
                 numImageFiles = numImageFiles,
                 lastEdit = DateTime.Now,
                 tags = tags,
-                placement = placement
+                room = room,
+                shelf = shelf
             };
             return a;
         }

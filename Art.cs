@@ -16,7 +16,8 @@ namespace BestefarsBilder
         public string year { get; set; }
         public string comment { get; set; }
         public string tags { get; set; }
-        public string placement { get; set; }
+        public string room { get; set; }
+        public string shelf { get; set; }
         public int numImageFiles { get; set; }
         public DateTime lastEdit = DateTime.Now;
 
@@ -26,11 +27,12 @@ namespace BestefarsBilder
                 "Katalognr.: " + id.ToString() + "\n" +
                 "Tittel: " + title + "\n" +
                 "Kunstform: " + artform + "\n" +
-                "Utstilling: " + exhibition + "\n" +
+                //"Utstilling: " + exhibition + "\n" +
                 "Dimensjoner: " + dimensions + "\n" +
                 "År: " + year + "\n" +
                 "Sist endret: " + lastEdit.ToString("dd-MM-yyyy HH:mm:ss") + "\n" +
-                "Plassering: " + placement + "\n" +
+                "Rom: " + room + "\n" +
+                "Hylle: " + shelf + "\n" +
                 "Tags: " + tags + "\n" +
                 "Kommentar: " + comment + "\n";
         }

@@ -114,7 +114,6 @@ C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Castle.Core.xml
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
-C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Moq.pdb
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\Moq.xml
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\System.Threading.Tasks.Extensions.xml
@@ -123,3 +122,4 @@ C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\obj\Debug\UnitTest.dll
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\obj\Debug\UnitTest.pdb
 C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\TestStorage.json
+C:\Users\adrian\Documents\Adrian\Hornsgate\form\BestefarsBilder\BestefarsBilder\UnitTest\bin\Debug\UnitTest.dll.config

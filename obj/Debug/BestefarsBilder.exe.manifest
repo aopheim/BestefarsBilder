@@ -42,50 +42,50 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BestefarsBilder.exe" size="36352">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="BestefarsBilder.exe" size="38400">
       <assemblyIdentity name="BestefarsBilder" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>OcJ1gYdzWpURY8D2svhNpggw4fvjpanKJJcIAt7hblg=</dsig:DigestValue>
+        <dsig:DigestValue>QCgJW+zxIhLHCNMDB6p5Jc/2QfcYf3HW9a6woJaLNe0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="675240">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="675752">
       <assemblyIdentity name="Newtonsoft.Json" version="12.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tmdJuB4UifzY11SyrTnr4NtoE0TjkqP0nckjVkO9vQY=</dsig:DigestValue>
+        <dsig:DigestValue>NZjMytW1Nf6m+TZiEHpBg7/WFnvx0PgCYENgk+3C468=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="QRCoder.dll" size="110080">
-      <assemblyIdentity name="QRCoder" version="1.3.5.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="QRCoder.dll" size="117248">
+      <assemblyIdentity name="QRCoder" version="1.3.6.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>w2v9hIDBdFECiwt5RX0pUTBQ88wMokgM+ITrd9NO8Jc=</dsig:DigestValue>
+        <dsig:DigestValue>EDjzM9i/vHbFBRCn9Fapl+zNCi2vtCVPPxAg7/pnFRQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Drawing.Common.dll" size="51344">
-      <assemblyIdentity name="System.Drawing.Common" version="4.0.0.0" publicKeyToken="CC7B13FFCD2DDD51" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Drawing.Common.dll" size="51248">
+      <assemblyIdentity name="System.Drawing.Common" version="4.0.0.1" publicKeyToken="CC7B13FFCD2DDD51" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>c46LVD6OrGQYmj+7D2fOBYqfAKWPK+W1SaFEP4OCRoE=</dsig:DigestValue>
+        <dsig:DigestValue>X6ss9XMR2B9Nfflq0TpTJ1rlTP+2nsLkunt9xwaggKE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
